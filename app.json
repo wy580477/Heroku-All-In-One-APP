@@ -1,0 +1,45 @@
+{
+    "name": "Deploy",
+    "description": "Deploy",
+    "keywords": ["Deploy"],
+    "env": {
+        "USER": {
+            "description": "User name",
+            "value": "admin"
+        },        
+        "PASSWORD": {
+            "description": "Password",
+            "value": "password"
+        },
+        "LANGUAGE": {
+            "description": "language(en or chs)",
+            "value": "en"
+        },
+        "PORTAL_PATH": {
+            "description": "Portal page & base URL for all web services",
+            "value": "/portal"
+        },
+        "POST_MODE": {
+            "description": "Aria2 Event Hook mode",
+            "value": "move_remote"
+        },
+        "DRIVE_NAME": {
+            "description": "Rclone remote name",
+            "value": "auto"
+        },
+        "RCLONE_CONFIG_BASE64": {
+            "description": "Base64 encoded Rclone config file",
+            "required": false,
+            "value": ""
+        },
+        "VMESS_UUID": {
+            "description": "Vmess UUID",
+            "value": "a3ac20a7-45fe-4656-97ee-937ffec46144"
+        },
+        "VMESS_PATH": {
+            "description": "Vmess Websocket Path",
+            "value": "/f495ba1f"
+        }
+    },
+    "stack": "container"
+}

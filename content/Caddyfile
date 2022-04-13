@@ -1,0 +1,64 @@
+# Created by wy580477 for customized container <https://github.com/wy580477>
+{
+        log {
+                exclude http.handlers.reverse_proxy
+        }
+}
+:{$PORT}
+encode gzip
+# Configure xray
+@websockets {
+        header Connection *Upgrade*
+        header Upgrade websocket
+        path {$VMESS_PATH}*
+}
+handle @websockets {
+        reverse_proxy * localhost:56803
+}
+# Configure AriaNg
+handle {$PORTAL_PATH}/ariang* {
+        redir {$PORTAL_PATH}/ariang {$PORTAL_PATH}/ariang/         
+        uri strip_prefix {$PORTAL_PATH}/ariang
+        basicauth {
+                {$USER} HASH
+        }
+        root * /.aria2allinoneworkdir/ariang
+        file_server
+}
+# Configure Rclone Web UI
+handle {$PORTAL_PATH}/rcloneweb* {
+        redir {$PORTAL_PATH}/rcloneweb {$PORTAL_PATH}/rcloneweb/         
+        uri strip_prefix {$PORTAL_PATH}/rcloneweb
+        basicauth {
+                {$USER} HASH
+        }
+        root * /.aria2allinoneworkdir/rcloneweb/build
+        file_server
+}
+# Configure Rclone RC
+handle_path {$PORTAL_PATH}/rclonerc {
+        reverse_proxy * localhost:56802
+}
+# Configure Rclone Serve
+handle_path {$PORTAL_PATH}/rclonerc/* {
+        reverse_proxy * localhost:56802
+}
+# Configure Aria2 RPC
+handle {$PORTAL_PATH}/jsonrpc {
+        uri replace {$PORTAL_PATH}/jsonrpc /jsonrpc
+        reverse_proxy /jsonrpc localhost:56800
+}
+# Configure Filebrowser
+handle {$PORTAL_PATH}/files* {
+        reverse_proxy {$PORTAL_PATH}/files* localhost:56801
+}
+reverse_proxy {$PORTAL_PATH}/files* localhost:56801
+handle {$PORTAL_PATH}* {  
+        redir {$PORTAL_PATH} {$PORTAL_PATH}/         
+        uri strip_prefix {$PORTAL_PATH}
+        basicauth {              
+                {$USER} HASH
+        }
+        root * /.aria2allinoneworkdir/homer
+        file_server
+}

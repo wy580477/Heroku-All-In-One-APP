@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Dummy run for building image
+if [ "${MODE}" = "build" ]; then
+    sleep infinity
+fi
+
+# Configure filebrowser
+filebrowser -d /.aria2allinoneworkdir/filebrowser.db config init -r /mnt/data
+filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,ping,nslookup,netstat,top,ps"
+if [ "${LANGUAGE}" = "chs" ]; then
+    filebrowser -d /.aria2allinoneworkdir/filebrowser.db users update ${USER} --locale zh-cn
+fi
+
+# Run filebrowser
+exec 2>&1
+exec filebrowser -d /.aria2allinoneworkdir/filebrowser.db -b ${PORTAL_PATH}/files -p 56801

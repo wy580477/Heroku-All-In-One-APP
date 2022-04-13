@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Dummy run for building image
+if [ "${MODE}" = "build" ]; then
+  sleep infinity
+fi
+
+# Configure AriaNG & RcloneWebUI
+if [ -z "${PORTAL_PATH}" ]; then
+  sed -i 's|rpcInterface:"jsonrpc"|rpcInterface:"'"${PORTAL_PATH}"'jsonrpc"|g' /.aria2allinoneworkdir/ariang/js/aria-ng-f1dd57abb9.min.js
+else
+  sed -i 's|rpcInterface:"jsonrpc"|rpcInterface:"'"${PORTAL_PATH/\//}"'/jsonrpc"|g' /.aria2allinoneworkdir/ariang/js/aria-ng-f1dd57abb9.min.js
+fi
+
+sed -i 's|ipAddress:a|ipAddress:`${window.location.protocol}//${window.location.hostname}'"${PORTAL_PATH}"'/rclonerc`|g' /.aria2allinoneworkdir/rcloneweb/build/static/js/3.90421092.chunk.js
+
+# Configure homer
+cp /.aria2allinoneworkdir/homer_conf/* /.aria2allinoneworkdir/homer/assets/tools/
+cp /.aria2allinoneworkdir/homer_conf/homer_${LANGUAGE}.yml /.aria2allinoneworkdir/homer/assets/config.yml
+sed -i "s|PORTAL_PATH|${PORTAL_PATH}|g;s|VMESS_PATH|${VMESS_PATH}|g;s|VMESS_UUID|${VMESS_UUID}|g" /.aria2allinoneworkdir/homer/assets/config.yml
+
+# Run language script
+/.aria2allinoneworkdir/caddy_init_${LANGUAGE}.sh
+
+# Configure Caddyfile
+HASH="$(caddy hash-password --plaintext ${PASSWORD})"
+sed -i "s|HASH|${HASH}|g" /.aria2allinoneworkdir/Caddyfile
+
+# Run caddy
+exec 2>&1
+exec caddy run --config /.aria2allinoneworkdir/Caddyfile --adapter caddyfile

@@ -1,0 +1,52 @@
+#!/bin/sh
+
+# Dummy run for building image
+if [ "${MODE}" = "build" ]; then
+	sleep infinity
+fi
+
+# Global variables
+DIR_RUNTIME="/usr/bin"
+DIR_TMP="$(mktemp -d)"
+
+# Write Ray configuration
+cat << EOF > /.aria2allinoneworkdir/ray.yaml
+log:
+  loglevel: warning
+dns:
+  servers:
+  - https+local://8.8.8.8/dns-query
+inbounds:
+- port: 56803
+  listen: localhost
+  protocol: vmess
+  settings:
+    clients:
+    - id: "${VMESS_UUID}"
+  streamSettings:
+    network: ws
+    wsSettings:
+      path: "${VMESS_PATH}"
+  sniffing:
+    enabled: true
+    destOverride:
+    - http
+    - tls
+outbounds:
+- protocol: freedom
+  tag: direct
+  settings:
+    domainStrategy: UseIPv4
+EOF
+
+# Get Ray executable release
+wget -O - https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip | busybox unzip -d ${DIR_TMP} -
+
+# Install Ray
+install -m 755 ${DIR_TMP}/xray ${DIR_RUNTIME}/ray
+rm -rf ${DIR_TMP}
+curl --retry 10 --retry-max-time 60 https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -o ${DIR_RUNTIME}/geoip.dat
+curl --retry 10 --retry-max-time 60 https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -o ${DIR_RUNTIME}/geosite.dat
+
+# Run Ray
+exec ${DIR_RUNTIME}/ray -config=/.aria2allinoneworkdir/ray.yaml

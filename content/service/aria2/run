@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Dummy run for building image
+if [ "${MODE}" = "build" ]; then
+       sleep infinity
+fi
+
+# Configure aria2
+touch /.aria2allinoneworkdir/aria2/aria2.session
+cp /.aria2allinoneworkdir/aria2/aria2_${LANGUAGE}.conf /.aria2allinoneworkdir/aria2.conf
+sed -i "s|^rpc-secret=.*|rpc-secret=${PASSWORD}|g" /.aria2allinoneworkdir/aria2.conf
+mkdir -p /mnt/data/downloads
+
+if [ "${DRIVE_NAME}" = "auto" ]; then
+       DRIVE_NAME_AUTO="$(sed -n '1p' /.aria2allinoneworkdir/drive.conf | sed "s/\[//g" | sed "s/\]//g")"
+       sed -i "s|^drive-name=.*|drive-name=${DRIVE_NAME_AUTO}|g" /.aria2allinoneworkdir/aria2/script.conf
+else
+       sed -i "s|^drive-name=.*|drive-name=${DRIVE_NAME}|g" /.aria2allinoneworkdir/aria2/script.conf
+fi
+
+if [ "${POST_MODE}" = "copy_remote_first" ]; then
+       sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/"${POST_MODE}".sh|g" /.aria2allinoneworkdir/aria2.conf
+       sed -i "s|^on-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-download-complete=/.aria2allinoneworkdir/aria2/copy_remote_other.sh|g" /.aria2allinoneworkdir/aria2.conf
+elif [ "${POST_MODE}" = "dummy" ]; then
+       sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/clean.sh|g" /.aria2allinoneworkdir/aria2.conf
+       sed -i "s|^on-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-download-complete=/.aria2allinoneworkdir/aria2/clean.sh|g" /.aria2allinoneworkdir/aria2.conf
+elif [ "${POST_MODE}" = "custom" ]; then
+       :
+else
+       sed -i "s|^on-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-download-complete=/.aria2allinoneworkdir/aria2/"${POST_MODE}".sh|g" /.aria2allinoneworkdir/aria2.conf
+       sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/clean.sh|g" /.aria2allinoneworkdir/aria2.conf
+fi
+
+# Run aria2
+exec 2>&1
+exec aria2c --conf-path="/.aria2allinoneworkdir/aria2.conf" \
+--enable-rpc \
+--rpc-listen-port=56800 \
+--show-console-readout false \
+--enable-mmap true

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Dummy run for building image
+if [ "${MODE}" = "build" ]; then
+	sleep infinity
+fi
+
+# Run rclone
+echo ${RCLONE_CONFIG_BASE64} | base64 -d  >/.aria2allinoneworkdir/drive.conf
+htpasswd -csb /.aria2allinoneworkdir/htpasswd ${USER} ${PASSWORD}
+exec 2>&1
+exec rclone rcd --rc-serve \
+--rc-web-gui-no-open-browser \
+--rc-htpasswd=/.aria2allinoneworkdir/htpasswd \
+--rc-addr=localhost:56802 \
+--buffer-size 4M \
+--transfers 4 \
+--config /.aria2allinoneworkdir/drive.conf \
+--rc-allow-origin=* \
+--use-mmap \
+--copy-links \
+--exclude /.aria2allinoneworkdir/
