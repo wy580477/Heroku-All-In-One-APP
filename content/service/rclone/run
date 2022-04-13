@@ -18,5 +18,4 @@ exec rclone rcd --rc-serve \
 --config /.aria2allinoneworkdir/drive.conf \
 --rc-allow-origin=* \
 --use-mmap \
---copy-links \
 --exclude /.aria2allinoneworkdir/
