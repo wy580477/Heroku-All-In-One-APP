@@ -36,9 +36,9 @@
 对控制Aria2和Rclone联动模式的POST_MODE变量说明：
  1. dummy 模式为无操作，move模式为下载及做种完成后移动到本地finished目录。
  2. move_remote 模式为下载及做种完成后先移动到本地data数据卷下finished目录，然后移动到rclone远程存储。
- 3. move_remote_only 模式为下载及做种完成后移动到rclone原创存储。
- 4. copy_remote_first模式为下载完成后立即复制到rclone原创存储，BT任务在做种前即触发。
- 5. copy_remote模式为下载及做种完成后先移动到本地data数据卷下finished目录，然后复制到rclone远程存储。
+ 3. move_remote_only 模式为下载及做种完成后移动到rclone远程存储。
+ 4. copy_remote_first模式为下载完成后立即复制到rclone远程存储，BT任务在做种前即触发。
+ 5. copy_remote模式为下载及做种完成后先移动到本地finished目录，然后复制到rclone远程存储。
  6. custom模式为自行设置aria2配置文件触发脚本选项。
 ### 初次使用
  1. 部署完成后，比如你的heroku域名是bobby.heroku.com，导航页路径是/portal，访问bobby.heroku.com/portal 即可到达导航页。
