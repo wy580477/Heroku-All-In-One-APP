@@ -54,7 +54,7 @@ remote = /mnt/data
 ```
  3. Rclone Web前端手动传输文件方法是点击页面左侧Explorer，然后选双版面布局，打开两个Rclone存储配置，直接拖动文件即可。
  4. 无法通过Rclone Web前端建立需要网页认证的存储配置。
- 5. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，script.conf为Aria自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
+ 5. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
  6. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
  7. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
 ```
