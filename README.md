@@ -13,6 +13,7 @@
 ## 注意
  1. **本项目仅为学习用途，请勿滥用，类似 Heroku 的免费服务少之又少，且用且珍惜。**
  2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合重度BT下载和共享文件用途。
+ 3. 免费Heroku dyno半小时无Web访问会休眠，可以使用[Helixtools]https://hetrixtools.com/uptime-monitor/215727.html 这样的免费VPS/网站监测服务定时Http ping，保持持续运行。
 ## 部署方式
  **请勿使用本仓库直接部署**
  1. 点击右上角Fork，再点击Creat Fork。
@@ -53,12 +54,18 @@ type = alias
 remote = /mnt/data
 ```
  3. Rclone Web前端手动传输文件方法是点击页面左侧Explorer，然后选双版面布局，打开两个Rclone存储配置，直接拖动文件即可。
- 4. 无法通过Rclone Web前端建立需要网页认证的存储配置。
- 5. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
- 6. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
- 7. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
+ 5. 无法通过Rclone Web前端建立需要网页认证的存储配置。
+ 6. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
+ 7. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
+ 8. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
 ```
 filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin
 ```
  9. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/filebrowser/xray/run文件修改。
  10. caddy设置可以通过content/Caddyfile文件修改。
+ 11. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令(sv,aria2c,rclone,du,df,free,ping,nslookup,netstat,top,ps):
+
+ ![image](https://user-images.githubusercontent.com/98247050/163199096-37536a86-0e11-40cf-b957-774e639a4952.png)
+ ![image](https://user-images.githubusercontent.com/98247050/163200055-dafdc514-8e22-4c69-803e-e02491ef6280.png)
+
+ 
