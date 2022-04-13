@@ -7,7 +7,7 @@ fi
 
 # Configure filebrowser
 filebrowser -d /.aria2allinoneworkdir/filebrowser.db config init -r /mnt/data
-filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,ping,nslookup,netstat,top,ps"
+filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
 if [ "${LANGUAGE}" = "chs" ]; then
     filebrowser -d /.aria2allinoneworkdir/filebrowser.db users update ${USER} --locale zh-cn
 fi
