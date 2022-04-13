@@ -2,8 +2,14 @@
 - [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  依靠来自P3TERX大佬的Aria2脚本，实现了Aria2下载完成自动触发Rclone上传。
 - [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路，解决了Heroku使用变量导入Rclone配置文件的难题。
 - [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，非常便于自定义。
+## 注意
+ 1. **本项目仅为学习用途，请勿滥用，类似 Heroku 的免费服务少之又少，且用且珍惜。**
+ 2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合重度BT下载和共享文件用途。
+ 3. 免费Heroku dyno半小时无Web访问会休眠，可以使用[Helixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
 
 [变量设置](#变量设置)  
+
+[部署方式](#部署方式) 
 
 [初次使用](#初次使用)  
 
@@ -17,10 +23,6 @@
  2. Aria2和Rclone多种联动模式。
  3. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
  4. 基于 [runit](http://smarden.org/runit/index.html) 的进程管理，每个进程可以独立启停，互不影响。
-## 注意
- 1. **本项目仅为学习用途，请勿滥用，类似 Heroku 的免费服务少之又少，且用且珍惜。**
- 2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合重度BT下载和共享文件用途。
- 3. 免费Heroku dyno半小时无Web访问会休眠，可以使用[Helixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
 ## 部署方式
  **请勿使用本仓库直接部署**
  1. 点击右上角Fork，再点击Creat Fork。
