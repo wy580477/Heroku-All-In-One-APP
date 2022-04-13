@@ -8,7 +8,7 @@
 ![image](https://user-images.githubusercontent.com/98247050/163175500-3c346c62-c2f3-4c7e-acea-36e541a26e6c.png) 
  1. 联动上传功能只需要准备rclone.conf配置文件, 其他一切配置都预备齐全。
  2. Aria2和Rclone多种联动模式。
- 3. Rclone以daemon方式运行，可实时在WebUI上监测传输情况。
+ 3. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
  4. 基于 [runit](http://smarden.org/runit/index.html) 的进程管理，每个进程可以独立启停，互不影响。
 ## 注意
  1. **本项目仅为学习用途，请勿滥用，类似 Heroku 的免费服务少之又少，且用且珍惜。**
