@@ -2,6 +2,13 @@
 - [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  依靠来自P3TERX大佬的Aria2脚本，实现了Aria2下载完成自动触发Rclone上传。
 - [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路，解决了Heroku使用变量导入Rclone配置文件的难题。
 - [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，非常便于自定义。
+
+[变量设置](#变量设置)  
+
+[初次使用](#初次使用)  
+
+[更多用法和注意事项](#更多用法和注意事项)  
+
 ## 概述
 本项目基于本人Aria2-AIO-Container（重构中)，集成了Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、Xray Vmess协议。
 
