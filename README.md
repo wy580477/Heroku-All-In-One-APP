@@ -60,5 +60,5 @@ remote = /mnt/data
 ```
 filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin
 ```
- 9. Xray设置可以通过content/service/filebrowser/xray/run文件修改。
+ 9. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/filebrowser/xray/run文件修改。
  10. caddy设置可以通过content/Caddyfile文件修改。
