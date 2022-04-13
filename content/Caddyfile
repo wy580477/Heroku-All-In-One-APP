@@ -52,7 +52,7 @@ handle {$PORTAL_PATH}/jsonrpc {
 handle {$PORTAL_PATH}/files* {
         reverse_proxy {$PORTAL_PATH}/files* localhost:56801
 }
-reverse_proxy {$PORTAL_PATH}/files* localhost:56801
+# Configure homer
 handle {$PORTAL_PATH}* {  
         redir {$PORTAL_PATH} {$PORTAL_PATH}/         
         uri strip_prefix {$PORTAL_PATH}
