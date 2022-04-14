@@ -46,6 +46,7 @@
 | `RCLONE_CONFIG_BASE64` | `` | Rclone配置文件Base64编码，可使用linux系统base64命令或者在线base64工具生成 |
 | `VMESS_UUID` | `a3ac20a7-45fe-4656-97ee-937ffec46144` | Vmess协议UUID，务必修改，建议使用UUID工具生成 |
 | `VMESS_PATH` | `/f495ba1f` | Vmess协议路径，不要包含敏感信息 |
+| `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
 
 对控制Aria2和Rclone联动模式的POST_MODE变量说明：
  1. dummy模式为无操作，move模式为下载及做种完成后移动到本地finished目录。
