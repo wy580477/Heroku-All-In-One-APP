@@ -2,4 +2,4 @@
 
 mkdir -p /mnt/data/log/ 2>/dev/null
 cp -r /.aria2allinoneworkdir/log/caddy /mnt/data/log/
-exec svlogd /mnt/data/log/caddy
+exec svlogd -tt /mnt/data/log/caddy
