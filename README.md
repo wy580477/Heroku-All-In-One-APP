@@ -3,8 +3,8 @@
 - [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路，解决了Heroku使用变量导入Rclone配置文件的难题。
 - [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，非常便于自定义。
 ## 注意
- 1. **本项目仅为学习用途，请勿滥用，类似 Heroku 的免费服务少之又少，且用且珍惜。**
- 2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合重度BT下载和共享文件用途。
+ 1. **本项目仅为学习用途，请勿滥用，重度使用可能导致账号被封。类似 Heroku 的免费服务少之又少，且用且珍惜。**
+ 2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合长期BT下载和共享文件用途。
  3. 免费Heroku dyno半小时无Web访问会休眠，可以使用[Helixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
 
 [概述](#概述) 
