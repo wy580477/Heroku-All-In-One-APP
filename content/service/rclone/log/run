@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p /mnt/data/log/ 2>/dev/null
+cp -r /.aria2allinoneworkdir/log/rclone /mnt/data/log/
+exec svlogd /mnt/data/log/rclone

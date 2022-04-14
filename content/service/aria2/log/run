@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir -p /mnt/data/log/ 2>/dev/null
+cp -r /.aria2allinoneworkdir/log/aria2 /mnt/data/log/
+exec svlogd /mnt/data/log/aria2
