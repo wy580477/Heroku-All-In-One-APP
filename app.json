@@ -21,7 +21,7 @@
         },
         "POST_MODE": {
             "description": "Aria2 Event Hook mode",
-            "value": "move_remote"
+            "value": "move"
         },
         "DRIVE_NAME": {
             "description": "Rclone remote name",
@@ -39,6 +39,10 @@
         "VMESS_PATH": {
             "description": "Vmess Websocket Path",
             "value": "/f495ba1f"
+        },
+        "TZ": {
+            "description": "Timezone",
+            "value": "UTC"
         }
     },
     "stack": "container"
