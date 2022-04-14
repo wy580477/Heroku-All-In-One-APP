@@ -19,13 +19,14 @@
 [更多用法和注意事项](#更多用法和注意事项)  
 
 ## 概述
-本项目基于本人Aria2-AIO-Container（重构中)，集成了Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、Xray Vmess协议。
+基于本人Aria2-AIO-Container项目（重构中)，集成了Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、Xray Vmess协议。
 
 ![image](https://user-images.githubusercontent.com/98247050/163175500-3c346c62-c2f3-4c7e-acea-36e541a26e6c.png) 
  1. 联动上传功能只需要准备rclone.conf配置文件, 其他一切配置都预备齐全。
  2. Aria2和Rclone多种联动模式。
  3. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
- 4. 基于 [runit](http://smarden.org/runit/index.html) 的进程管理，每个进程可以独立启停，互不影响。
+ 4. log目录下有每个进程独立日志。
+ 5. 基于 [runit](http://smarden.org/runit/index.html) 的进程管理，每个进程可以独立启停，互不影响。
 ## 部署方式
  **请勿使用本仓库直接部署**
  1. 点击右上角Fork，再点击Creat Fork。
@@ -77,9 +78,22 @@ remote = /mnt/data
 ```
 filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin
 ```
- 11. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps
+ 11. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
 
- ![image](https://user-images.githubusercontent.com/98247050/163199096-37536a86-0e11-40cf-b957-774e639a4952.png)
- ![image](https://user-images.githubusercontent.com/98247050/163200055-dafdc514-8e22-4c69-803e-e02491ef6280.png)
+     top -n 1 查看进程资源占用情况
+     
+     ![image](https://user-images.githubusercontent.com/98247050/163199096-37536a86-0e11-40cf-b957-774e639a4952.png)
+     
+     du命令查看目录空间占用，df命令查看硬盘空间占用
+     
+     ![image](https://user-images.githubusercontent.com/98247050/163319167-e255c1a2-671c-4a4f-8ba0-36953e7e1176.png)
+     
+     rclone命令传输文件
+     
+     ![image](https://user-images.githubusercontent.com/98247050/163318804-e20213bf-894c-430b-aafa-060589413ead.png)  
+     
+     sv命令控制服务启停和执行aria2c命令下载文件
+     
+     ![image](https://user-images.githubusercontent.com/98247050/163200055-dafdc514-8e22-4c69-803e-e02491ef6280.png)
 
  
