@@ -56,7 +56,7 @@
  5. copy_remote模式为下载及做种完成后先移动到本地finished目录，然后复制到rclone远程存储。
  6. custom模式为自行设置aria2配置文件触发脚本选项。
 ### 初次使用
- 1. 部署完成后，比如你的heroku域名是bobby.heroku.com，导航页路径是/portal，访问bobby.heroku.com/portal 即可到达导航页。
+ 1. 部署完成后，比如你的heroku域名是bobby.herokuapp.com，导航页路径是/portal，访问bobby.herokuapp.com/portal 即可到达导航页。
  2. 点击AriaNg，这时会弹出认证失败警告，不要慌，按下图把之前部署时设置的密码填入RPC密钥即可。
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
 ### 更多用法和注意事项
