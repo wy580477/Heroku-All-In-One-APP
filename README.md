@@ -72,6 +72,7 @@ remote = /mnt/data
  4. 因为Heroku文件系统的临时性，Rclone无法更新token，所以每隔一段时间需要更新Rclone配置文件变量，不然token会过期。
  5. 无法通过Rclone Web前端建立需要网页认证的存储配置。
  7. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
+ 8. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
  9. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
  10. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。
  11. caddy设置可以通过content/Caddyfile文件修改。
@@ -79,7 +80,7 @@ remote = /mnt/data
 ```
 filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin
 ```
- 11. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
+ 13. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
 
      top -n 1 查看进程资源占用情况
      
@@ -92,5 +93,3 @@ filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWOR
      sv命令控制服务启停和执行aria2c命令下载文件
      
      ![image](https://user-images.githubusercontent.com/98247050/163200055-dafdc514-8e22-4c69-803e-e02491ef6280.png)
-
- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
