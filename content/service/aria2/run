@@ -9,7 +9,7 @@ fi
 touch /.aria2allinoneworkdir/aria2/aria2.session
 cp /.aria2allinoneworkdir/aria2/aria2_${LANGUAGE}.conf /.aria2allinoneworkdir/aria2.conf
 sed -i "s|^rpc-secret=.*|rpc-secret=${PASSWORD}|g" /.aria2allinoneworkdir/aria2.conf
-/.aria2allinoneworkdir/aria2/tracker.sh /.aria2allinoneworkdir/aria2.conf RPC
+/.aria2allinoneworkdir/aria2/tracker.sh /.aria2allinoneworkdir/aria2.conf
 mkdir -p /mnt/data/downloads
 
 if [ "${DRIVE_NAME}" = "auto" ]; then
