@@ -70,15 +70,15 @@ remote = /mnt/data
  3. Rclone Web前端手动传输文件方法是点击页面左侧Explorer，然后选双版面布局，打开两个Rclone存储配置，直接拖动文件即可。
  4. 因为Heroku文件系统的临时性，Rclone无法更新token，所以每隔一段时间需要更新Rclone配置文件变量，不然token会过期。
  5. 无法通过Rclone Web前端建立需要网页认证的存储配置。
- 7. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
- 8. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
- 9. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
- 10. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。
- 11. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
+ 6. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
+ 7. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
+ 8. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
+ 9. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。
+ 10. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
 ```
 filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin
 ```
- 12. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
+ 11. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
 
      top -n 1 查看进程资源占用情况
      
