@@ -26,7 +26,6 @@
  2. Aria2和Rclone多种联动模式。
  3. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
  4. log目录下有每个进程独立日志。
- 5. 基于 [runit](http://smarden.org/runit/index.html) 的进程管理，每个进程可以独立启停，互不影响。
 ## 部署方式
  **请勿使用本仓库直接部署**
  1. 点击右上角Fork，再点击Creat Fork。
@@ -75,12 +74,11 @@ remote = /mnt/data
  8. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
  9. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
  10. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。
- 11. caddy设置可以通过content/Caddyfile文件修改。
- 12. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
+ 11. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
 ```
 filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin
 ```
- 13. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
+ 12. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
 
      top -n 1 查看进程资源占用情况
      
