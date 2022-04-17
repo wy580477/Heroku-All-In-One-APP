@@ -21,7 +21,7 @@
         },
         "POST_MODE": {
             "description": "Aria2 Event Hook mode",
-            "value": "move"
+            "value": "move_remote"
         },
         "DRIVE_NAME": {
             "description": "Rclone remote name",
