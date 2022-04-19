@@ -28,6 +28,7 @@
  4. log目录下有每个进程独立日志。
 ## 部署方式
  **请勿使用本仓库直接部署**
+ **Heroku修复安全漏洞中，目前无法从私有库部署**
  1. 点击右上角Fork，再点击Creat Fork。
  2. 在Fork出来的仓库页面上点击Setting，勾选Template repository。
  3. 然后点击Code返回之前的页面，点Setting下面新出现的按钮Use this template，起个随机名字，选Private创建私有库。
