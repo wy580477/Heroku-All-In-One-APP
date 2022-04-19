@@ -1,0 +1,3 @@
+#!/bin/sh
+
+lux --aria2 --aria2-addr localhost:56800 --aria2-token ${PASSWORD} $@

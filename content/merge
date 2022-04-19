@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mkdir ./remuxed 2>/dev/null
+
+for i in *\[0\].*; do ffmpeg -i "${i}" -i "${i/\[0\]/[1]}" $@ -map 0:v -map 1:a -c copy ./remuxed/"${i/\[0\]/}"; done
