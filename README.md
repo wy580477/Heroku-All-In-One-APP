@@ -27,7 +27,8 @@
  3. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
  4. log目录下有每个进程独立日志。
 ## 部署方式
- **请勿使用本仓库直接部署**
+ **请勿使用本仓库直接部署**  
+ 
  **Heroku修复安全漏洞中，目前无法从私有库部署**
  1. 点击右上角Fork，再点击Creat Fork。
  2. 在Fork出来的仓库页面上点击Setting，勾选Template repository。
