@@ -4,7 +4,7 @@ COPY ./content /.aria2allinoneworkdir/
 
 ARG MODE=build
 
-RUN apk add --no-cache curl caddy jq bash findutils runit rclone apache2-utils tzdata \
+RUN apk add --no-cache curl caddy jq bash findutils runit rclone apache2-utils tzdata ttyd \
     && wget -qO - https://github.com/mayswind/AriaNg/releases/download/1.2.3/AriaNg-1.2.3.zip | busybox unzip -qd /.aria2allinoneworkdir/ariang - \
     && wget -qO - https://github.com/rclone/rclone-webui-react/releases/latest/download/currentbuild.zip | busybox unzip -qd /.aria2allinoneworkdir/rcloneweb - \
     && wget -qO - https://github.com/bastienwirtz/homer/releases/latest/download/homer.zip | busybox unzip -qd /.aria2allinoneworkdir/homer - \
