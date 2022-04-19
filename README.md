@@ -21,6 +21,8 @@
 ## 概述
 基于本人 [Aria2-AIO-Container](https://github.com/wy580477/Aria2-AIO-Container) Aria2全能容器项目，集成了Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、lux多视频站下载工具、ttyd Web终端、Xray Vmess协议。
 
+![image](https://user-images.githubusercontent.com/98247050/163951676-f5c98de9-b895-4555-a404-f88325d5927f.png)
+
 
  1. 联动上传功能只需要准备rclone.conf配置文件, 其他一切配置都预备齐全。
  2. Aria2和Rclone多种联动模式，复制、移动、边做种边上传。
