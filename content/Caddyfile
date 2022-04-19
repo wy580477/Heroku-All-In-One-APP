@@ -15,6 +15,15 @@ encode gzip
 handle @websockets {
         reverse_proxy * localhost:56803
 }
+# Configure ttyd
+handle {$PORTAL_PATH}/ttyd* {
+        redir {$PORTAL_PATH}/ttyd {$PORTAL_PATH}/ttyd/
+        uri strip_prefix {$PORTAL_PATH}/ttyd       
+        basicauth {              
+                {$USER} HASH
+        }     
+        reverse_proxy * localhost:7681
+}
 # Configure AriaNg
 handle {$PORTAL_PATH}/ariang* {
         redir {$PORTAL_PATH}/ariang {$PORTAL_PATH}/ariang/         
