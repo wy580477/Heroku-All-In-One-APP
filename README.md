@@ -19,13 +19,15 @@
 [更多用法和注意事项](#更多用法和注意事项)  
 
 ## 概述
-基于本人 [Aria2-AIO-Container](https://github.com/wy580477/Aria2-AIO-Container) Aria2全能容器项目，集成了Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、Xray Vmess协议。
+基于本人 [Aria2-AIO-Container](https://github.com/wy580477/Aria2-AIO-Container) Aria2全能容器项目，集成了Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、lux多视频站下载工具、ttyd Web终端、Xray Vmess协议。
 
-![image](https://user-images.githubusercontent.com/98247050/163175500-3c346c62-c2f3-4c7e-acea-36e541a26e6c.png) 
+![image](https://user-images.githubusercontent.com/98247050/163949262-9070d913-0817-46a0-a7aa-39a28af308b5.png)
+
  1. 联动上传功能只需要准备rclone.conf配置文件, 其他一切配置都预备齐全。
- 2. Aria2和Rclone多种联动模式。
+ 2. Aria2和Rclone多种联动模式，复制、移动、边做种边上传。
  3. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
- 4. log目录下有每个进程独立日志。
+ 4. ttyd网页终端，可命令行执行lux视频下载工具和其它命令。
+ 5. log目录下有每个进程独立日志。
 ## 部署方式
  **请勿使用本仓库直接部署**  
  
@@ -60,6 +62,10 @@
  1. 部署完成后，比如你的heroku域名是bobby.herokuapp.com，导航页路径是/portal，访问bobby.herokuapp.com/portal 即可到达导航页。
  2. 点击AriaNg，这时会弹出认证失败警告，不要慌，按下图把之前部署时设置的密码填入RPC密钥即可。
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
+ 3. lux多视频站下载工具通过ttyd网页终端执行，使用方法详细见：https://github.com/iawia002/lux
+    内置快捷指令：
+    luxa：使用aria2下载视频，速度更快，但部分视频和音频分离下载的站点（youtube、B站等）需要手动合并，下载完成后受POST_MODE变量控制。
+    merge：合并当前目录下视频和音频文件到remuxed目录下。
 ### 更多用法和注意事项
  1. Heroku每24小时重启后恢复到部署时文件系统，所以除了变量外任何改动都建议在部署前在github仓库内修改。
  2. 修改Heroku app变量方法：在Heroku app页面上点击setting，再点击Reveal Config Vars即可修改。
@@ -76,20 +82,3 @@ remote = /mnt/data
  7. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
  8. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
  9. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。
- 10. 为了安全考虑，默认建立的Filebrowser用户无管理员权限，可在content/service/filebrowser/run文件中下面命令后加上--perm.admin赋予管理员权限。
-```
-filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin
-```
- 11. 可以通过Filebrowser Web Shell查看APP运行信息、运行aria2c和rclone命令、以及控制服务启停，预置可用命令：sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps  
-
-     top -n 1 查看进程资源占用情况
-     
-     ![image](https://user-images.githubusercontent.com/98247050/163199096-37536a86-0e11-40cf-b957-774e639a4952.png)
-     
-     du命令查看目录空间占用，df命令查看硬盘空间占用
-     
-     ![image](https://user-images.githubusercontent.com/98247050/163319167-e255c1a2-671c-4a4f-8ba0-36953e7e1176.png)
-     
-     sv命令控制服务启停和执行aria2c命令下载文件
-     
-     ![image](https://user-images.githubusercontent.com/98247050/163200055-dafdc514-8e22-4c69-803e-e02491ef6280.png)
