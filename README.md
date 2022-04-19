@@ -63,9 +63,9 @@
  1. 部署完成后，比如你的heroku域名是bobby.herokuapp.com，导航页路径是/portal，访问bobby.herokuapp.com/portal 即可到达导航页。
  2. 点击AriaNg，这时会弹出认证失败警告，不要慌，按下图把之前部署时设置的密码填入RPC密钥即可。
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
- 3. lux多视频站下载工具通过ttyd网页终端执行，使用方法详细见：https://github.com/iawia002/lux
-    内置快捷指令：
-    luxa：使用aria2下载视频，速度更快，但部分视频和音频分离下载的站点（youtube、B站等）需要手动合并，下载完成后受POST_MODE变量控制。
+ 3. lux多视频站下载工具通过ttyd网页终端执行，使用方法详细见：https://github.com/iawia002/lux  
+    内置快捷指令：  
+    luxa：使用aria2下载视频，速度更快，但部分视频和音频分离下载的站点（youtube、B站等）需要手动合并，下载完成后受POST_MODE变量控制。  
     merge：合并当前目录下视频和音频文件到remuxed目录下。
 ### 更多用法和注意事项
  1. Heroku每24小时重启后恢复到部署时文件系统，所以除了变量外任何改动都建议在部署前在github仓库内修改。
