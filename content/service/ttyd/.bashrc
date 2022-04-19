@@ -6,5 +6,5 @@ alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
 export PS1='\w$ '
 export HOME=/mnt/data
-alias lux="lux -o /mnt/data/videos -n "
+alias lux="lux -o /mnt/data/videos -n 50"
 cd
