@@ -43,7 +43,7 @@
  
  如果从公开库部署，建议把用户名/密码等其它变量也加入secrets，修改/.github/workflows/heroku-deploy-release.yml文件，参照RCLONE_CONFIG_BASE64的写法调用。
  
- Secrets和变量设置好以后，点击Releases，选Draft a new release，tag填 v*.*.* 的格式，即可触发自动部署。
+ Secrets和变量设置好以后，点击Releases，选Draft a new release，tag填 v*.\*.\* 的格式，即可触发自动部署。
 
  **Heroku修复安全漏洞中，目前无法通过网页从私有库部署**
  1. 点击右上角Fork，再点击Creat Fork。
