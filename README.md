@@ -21,6 +21,7 @@
 ## 概述
 基于本人 [Aria2-AIO-Container](https://github.com/wy580477/Aria2-AIO-Container) Aria2全能容器项目，集成了Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、lux多视频站下载工具、ttyd Web终端、Xray Vmess协议。
 
+
  1. 联动上传功能只需要准备rclone.conf配置文件, 其他一切配置都预备齐全。
  2. Aria2和Rclone多种联动模式，复制、移动、边做种边上传。
  3. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
@@ -60,9 +61,9 @@
  1. 部署完成后，比如你的heroku域名是bobby.herokuapp.com，导航页路径是/portal，访问bobby.herokuapp.com/portal 即可到达导航页。
  2. 点击AriaNg，这时会弹出认证失败警告，不要慌，按下图把之前部署时设置的密码填入RPC密钥即可。
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
- 3. lux多视频站下载工具通过ttyd网页终端执行，使用方法详细见：https://github.com/iawia002/lux
-    内置快捷指令：
-    luxa：使用aria2下载视频，速度更快，但部分视频和音频分离下载的站点（youtube、B站等）需要手动合并，下载完成后受POST_MODE变量控制。
+ 3. lux多视频站下载工具通过ttyd网页终端执行，使用方法详细见：https://github.com/iawia002/lux  
+    内置快捷指令：  
+    luxa：使用aria2下载视频，速度更快，但部分视频和音频分离下载的站点（youtube、B站等）需要手动合并，下载完成后受POST_MODE变量控制。  
     merge：合并当前目录下视频和音频文件到remuxed目录下。
 ### 更多用法和注意事项
  1. Heroku每24小时重启后恢复到部署时文件系统，所以除了变量外任何改动都建议在部署前在github仓库内修改。
