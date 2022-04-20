@@ -16,3 +16,6 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           usedocker: true
+          env_file: ".env"
+        env:
+          HD_RCLONE_CONFIG_BASE64: ${{secrets.RCLONE_CONFIG_BASE64}}  
