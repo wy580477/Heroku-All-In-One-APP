@@ -14,6 +14,7 @@ RUN apk add --no-cache curl caddy jq bash findutils runit rclone apache2-utils t
     && chmod +x /.aria2allinoneworkdir/service/*/run /.aria2allinoneworkdir/service/*/log/run /.aria2allinoneworkdir/aria2/*.sh /.aria2allinoneworkdir/*.sh /.aria2allinoneworkdir/luxa /.aria2allinoneworkdir/merge \
     && mv /.aria2allinoneworkdir/merge /usr/bin \
     && mv /.aria2allinoneworkdir/luxa /usr/bin \
-    && ln -s /.aria2allinoneworkdir/service/* /etc/service/
+    && ln -s /.aria2allinoneworkdir/service/* /etc/service/ \
+    && mkdir /mnt/data/videos 
 
 ENTRYPOINT ["sh","/.aria2allinoneworkdir/entrypoint.sh"]
