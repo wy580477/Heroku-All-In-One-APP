@@ -1,0 +1,16 @@
+#!/bin/sh
+
+sleep 300
+
+DRIVE_NAME_AUTO="$(sed -n '1p' /.aria2allinoneworkdir/drive.conf | sed "s/\[//g" | sed "s/\]//g")"
+if [ "${DRIVE_NAME}" = "auto" ]; then
+    DRIVENAME=${DRIVE_NAME_AUTO}
+else 
+    DRIVENAME=${DRIVE_NAME}
+fi
+
+exec 2>&1
+rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/aria2/aria2.session "${DRIVENAME}":/herokuallinoneapp/
+rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/aria2/dht.dat "${DRIVENAME}":/herokuallinoneapp/
+rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/filebrowser.db "${DRIVENAME}":/herokuallinoneapp/
+rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/aria2/aria2.conf "${DRIVENAME}":/herokuallinoneapp/

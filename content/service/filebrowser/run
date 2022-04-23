@@ -5,11 +5,29 @@ if [ "${MODE}" = "build" ]; then
     sleep infinity
 fi
 
+DRIVE_NAME_AUTO="$(sed -n '1p' /.aria2allinoneworkdir/drive.conf | sed "s/\[//g" | sed "s/\]//g")"
+if [ "${DRIVE_NAME}" = "auto" ]; then
+    DRIVENAME=${DRIVE_NAME_AUTO}
+else 
+    DRIVENAME=${DRIVE_NAME}
+fi
+
+rclone move --config /.aria2allinoneworkdir/drive.conf "${DRIVENAME}":/herokuallinoneapp/filebrowser.db /.aria2allinoneworkdir/ 2>/dev/null
+
 # Configure filebrowser
-filebrowser -d /.aria2allinoneworkdir/filebrowser.db config init -r /mnt/data
-filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
-if [ "${LANGUAGE}" = "chs" ]; then
-    filebrowser -d /.aria2allinoneworkdir/filebrowser.db users update ${USER} --locale zh-cn
+if [ ! -f "/.aria2allinoneworkdir/filebrowser.db" ]; then
+    filebrowser -d /.aria2allinoneworkdir/filebrowser.db config init -r /mnt
+    filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
+    if [ "${LANGUAGE}" = "chs" ]; then
+        filebrowser -d /.aria2allinoneworkdir/filebrowser.db users update ${USER} --locale zh-cn
+    fi
+else
+    if [ "${LANGUAGE}" = "chs" ]; then
+        filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --locale zh-cn --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
+    else
+        filebrowser -d /.aria2allinoneworkdir/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
+    fi
+    filebrowser -d /.aria2allinoneworkdir/filebrowser.db users update ${USER} -p ${PASSWORD}
 fi
 
 # Run filebrowser

@@ -7,15 +7,24 @@ fi
 
 # Configure aria2
 touch /.aria2allinoneworkdir/aria2/aria2.session
-cp /.aria2allinoneworkdir/aria2/aria2_${LANGUAGE}.conf /.aria2allinoneworkdir/aria2.conf
+rclone move --config /.aria2allinoneworkdir/drive.conf "${DRIVENAME}":/herokuallinoneapp/aria2.conf /.aria2allinoneworkdir/aria2/aria2.conf 2>/dev/null
+rclone move --config /.aria2allinoneworkdir/drive.conf "${DRIVENAME}":/herokuallinoneapp/aria2.session /.aria2allinoneworkdir/aria2/ 2>/dev/null
+rclone move --config /.aria2allinoneworkdir/drive.conf "${DRIVENAME}":/herokuallinoneapp/dht.dat /.aria2allinoneworkdir/aria2/ 2>/dev/null
+
+if [ ! -f "/.aria2allinoneworkdir/aria2.conf" ]; then
+       cp /.aria2allinoneworkdir/aria2/aria2_${LANGUAGE}.conf /.aria2allinoneworkdir/aria2.conf
+fi
+
 sed -i "s|^rpc-secret=.*|rpc-secret=${PASSWORD}|g" /.aria2allinoneworkdir/aria2.conf
 /.aria2allinoneworkdir/aria2/tracker.sh /.aria2allinoneworkdir/aria2.conf 2>/dev/null
 mkdir -p /mnt/data/downloads
 
 if [ "${DRIVE_NAME}" = "auto" ]; then
        DRIVE_NAME_AUTO="$(sed -n '1p' /.aria2allinoneworkdir/drive.conf | sed "s/\[//g" | sed "s/\]//g")"
+       DRIVENAME=${DRIVE_NAME_AUTO}
        sed -i "s|^drive-name=.*|drive-name=${DRIVE_NAME_AUTO}|g" /.aria2allinoneworkdir/aria2/script.conf
 else
+       DRIVENAME=${DRIVE_NAME}
        sed -i "s|^drive-name=.*|drive-name=${DRIVE_NAME}|g" /.aria2allinoneworkdir/aria2/script.conf
 fi
 

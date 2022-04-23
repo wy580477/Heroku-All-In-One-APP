@@ -6,7 +6,6 @@ if [ "${MODE}" = "build" ]; then
 fi
 
 # Run rclone
-echo ${RCLONE_CONFIG_BASE64} | base64 -d  >/.aria2allinoneworkdir/drive.conf
 htpasswd -csb /.aria2allinoneworkdir/htpasswd ${USER} ${PASSWORD}
 exec 2>&1
 exec rclone rcd --rc-serve \
