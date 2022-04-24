@@ -17,15 +17,15 @@ rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/herokuallinone
 # Configure filebrowser
 if [ ! -f "/mnt/data/config/filebrowser.db" ]; then
     filebrowser -d /mnt/data/config/filebrowser.db config init -r /mnt/data
-    filebrowser -d /mnt/data/config/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
+    filebrowser -d /mnt/data/config/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
     if [ "${LANGUAGE}" = "chs" ]; then
         filebrowser -d /mnt/data/config/filebrowser.db users update ${USER} --locale zh-cn
     fi
 else
     if [ "${LANGUAGE}" = "chs" ]; then
-        filebrowser -d /mnt/data/config/filebrowser.db users add ${USER} ${PASSWORD} --locale zh-cn --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
+        filebrowser -d /mnt/data/config/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin --locale zh-cn --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
     else
-        filebrowser -d /mnt/data/config/filebrowser.db users add ${USER} ${PASSWORD} --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
+        filebrowser -d /mnt/data/config/filebrowser.db users add ${USER} ${PASSWORD} --perm.admin --commands="sv,aria2c,rclone,du,df,free,nslookup,netstat,top,ps"
     fi
     filebrowser -d /mnt/data/config/filebrowser.db users update ${USER} -p ${PASSWORD}
 fi
