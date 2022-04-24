@@ -14,7 +14,6 @@ exec rclone rcd --rc-serve \
 --rc-addr=localhost:56802 \
 --buffer-size 4M \
 --transfers 4 \
---config /.aria2allinoneworkdir/drive.conf \
+--config /mnt/data/config/rclone.conf \
 --rc-allow-origin=* \
---use-mmap \
---exclude /.aria2allinoneworkdir/
+--use-mmap
