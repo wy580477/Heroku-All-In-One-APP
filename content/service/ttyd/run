@@ -1,4 +1,4 @@
 #!/bin/sh
 
 exec 2>&1
-exec ttyd -i 127.0.0.1 -P 3 -t fontSize=17 -t 'theme={"background": "black"}' bash --rcfile ./.bashrc
+exec ttyd -i 127.0.0.1 -P 3 -t fontSize=17 -t titleFixed=Heroku_ttyd -t 'theme={"background": "black"}' bash --rcfile ./.bashrc
