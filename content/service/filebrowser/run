@@ -9,7 +9,7 @@ fi
 DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
 if [ "${DRIVE_NAME}" = "auto" ]; then
     DRIVENAME=${DRIVE_NAME_AUTO}
-else 
+else
     DRIVENAME=${DRIVE_NAME}
 fi
 
