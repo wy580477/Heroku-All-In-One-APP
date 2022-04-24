@@ -88,8 +88,8 @@
 ### 更多用法和注意事项
  1. Heroku每24小时重启后恢复到部署时文件系统，尽管配置文件会自动备份和尝试恢复，除了变量外任何改动都建议在部署前在github仓库内修改。
  2. 修改Heroku app变量方法：在Heroku app页面上点击setting，再点击Reveal Config Vars即可修改。
- 3. 需要指定HEROKU_API_KEY、HEROKU_APP_NAME、RESTART_TIME三个变量，才能自动更新rclone配置文件token。
- 4. RESTART_TIME变量指定dyno重启时间，需要Heroku api key和Heroku app name变量配合才能工作。Dyno的重启不是严格遵循24小时间隔，前后有一定误差，所以仍可能在指定的时间之前一小段时间重启。
+ 3. 自动更新rclone配置文件token，需要指定HEROKU_API_KEY、HEROKU_APP_NAME、RESTART_TIME三个变量，而且dyno在指定的RESTART_TIME时间必须正在运行。
+ 4. RESTART_TIME变量指定dyno重启时间，需要HEROKU_API_KEY和HEROKU_APP_NAME变量配合才能工作。Dyno的重启不是严格遵循24小时间隔，前后有一定误差，所以仍可能在指定的时间之前一小段时间重启。
  5. Rclone配置文件末尾加上如下内容，可以在Rclone Web前端中挂载本地存储，方便手动上传。
 ```
 [local]
