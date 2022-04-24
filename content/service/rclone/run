@@ -6,7 +6,6 @@ if [ "${MODE}" = "build" ]; then
 fi
 
 # Run rclone
-echo ${RCLONE_CONFIG_BASE64} | base64 -d  >/.aria2allinoneworkdir/drive.conf
 htpasswd -csb /.aria2allinoneworkdir/htpasswd ${USER} ${PASSWORD}
 exec 2>&1
 exec rclone rcd --rc-serve \
@@ -15,7 +14,6 @@ exec rclone rcd --rc-serve \
 --rc-addr=localhost:56802 \
 --buffer-size 4M \
 --transfers 4 \
---config /.aria2allinoneworkdir/drive.conf \
+--config /mnt/data/config/rclone.conf \
 --rc-allow-origin=* \
---use-mmap \
---exclude /.aria2allinoneworkdir/
+--use-mmap

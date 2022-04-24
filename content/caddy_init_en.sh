@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DRIVE_NAME_AUTO="$(sed -n '1p' /.aria2allinoneworkdir/drive.conf | sed "s/\[//g" | sed "s/\]//g")"
+DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
 if [ "${DRIVE_NAME}" = "auto" ]; then
     DRIVENAME=${DRIVE_NAME_AUTO}
 else 
@@ -13,7 +13,7 @@ elif [ "${POST_MODE}" = "move" ]; then
     sed -i "s|MODE_STATUS|<br />Aria2 Event Hook:<br />[move] Move files to local finished folder after download completed</b>|g" /.aria2allinoneworkdir/homer/assets/config.yml
 elif [ "${POST_MODE}" = "custom" ]; then
     sed -i "s|MODE_STATUS|<br />Aria2 Event Hook: [custom]</b>|g" /.aria2allinoneworkdir/homer/assets/config.yml
-elif [ ! -f "/.aria2allinoneworkdir/drive.conf" ]; then
+elif [ ! -f "/mnt/data/config/rclone.conf" ]; then
     sed -i "s|MODE_STATUS|<br />Aria2 Event Hook:<br />Fail to find Rclone config file</b>|g" /.aria2allinoneworkdir/homer/assets/config.yml
 elif [ "${POST_MODE}" = "copy_remote" ]; then
     sed -i "s|MODE_STATUS|<br />Aria2 Event Hook:<br />[copy_remote] Move files to local finished folder after both download and seeding completed, then copy to Rclone remote ${DRIVENAME}</b>|g" /.aria2allinoneworkdir/homer/assets/config.yml

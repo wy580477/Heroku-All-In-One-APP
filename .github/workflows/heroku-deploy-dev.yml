@@ -18,4 +18,6 @@ jobs:
           usedocker: true
           env_file: ".env"
         env:
-          HD_RCLONE_CONFIG_BASE64: ${{secrets.RCLONE_CONFIG_BASE64}}  
+          HD_RCLONE_CONFIG_BASE64: ${{secrets.RCLONE_CONFIG_BASE64}}
+          HD_HEROKU_APP_NAME: ${{secrets.HEROKU_APP_NAME}}
+          HD_HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}

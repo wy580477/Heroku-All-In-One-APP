@@ -105,9 +105,9 @@ UPLOAD_FILE() {
             echo
         )
         if [ -f "${LOCAL_PATH}" ]; then
-            rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802${RCLONERC_PATH} operations/movefile srcFs="${DOWNLOAD_DIR}" srcRemote="${TASK_FILE_NAME}" dstFs="${REMOTE_PATH}" dstRemote="${TASK_FILE_NAME}" _async=true 
+            rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/movefile srcFs="${DOWNLOAD_DIR}" srcRemote="${TASK_FILE_NAME}" dstFs="${REMOTE_PATH}" dstRemote="${TASK_FILE_NAME}" _async=true 
         else
-            rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802${RCLONERC_PATH} sync/move srcFs="${LOCAL_PATH}" dstFs="${REMOTE_PATH}" _async=true
+            rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 sync/move srcFs="${LOCAL_PATH}" dstFs="${REMOTE_PATH}" _async=true
         fi   
         RCLONE_EXIT_CODE=$?
         if [ ${RCLONE_EXIT_CODE} -eq 0 ]; then

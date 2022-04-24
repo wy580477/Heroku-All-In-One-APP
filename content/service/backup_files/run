@@ -1,0 +1,18 @@
+#!/bin/sh
+
+sleep 300
+
+DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
+if [ "${DRIVE_NAME}" = "auto" ]; then
+    DRIVENAME=${DRIVE_NAME_AUTO}
+else 
+    DRIVENAME=${DRIVE_NAME}
+fi
+
+exec 2>&1
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=aria2.session dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=aria2.session _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=dht.dat dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=dht.dat _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/mnt/data/config srcRemote=aria2.conf dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=aria2.conf _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/mnt/data/config srcRemote=script.conf dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=script.conf _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/mnt/data/config srcRemote=filebrowser.db dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=filebrowser.db _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/mnt/data/config srcRemote=rclone.conf dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=rclone.conf _async=true

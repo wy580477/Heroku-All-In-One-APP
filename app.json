@@ -43,6 +43,21 @@
         "TZ": {
             "description": "Timezone",
             "value": "UTC"
+        },
+        "RESTART_TIME": {
+            "description": "Dyno restart time",
+            "required": false,
+            "value": ""
+        },
+        "HEROKU_APP_NAME": {
+            "description": "Name of this heroku app",
+            "required": false,
+            "value": ""
+        },
+        "HEROKU_API_KEY": {
+            "description": "Your heroku api key",
+            "required": false,
+            "value": ""
         }
     },
     "stack": "container"
