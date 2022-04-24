@@ -36,6 +36,14 @@
 
  **请勿使用本仓库直接部署**  
  
+  **Heroku修复安全漏洞中，目前无法通过网页从私有库部署**  
+ 
+ **网页部署方式**
+ 1. 点击右上角Fork，再点击Creat Fork。
+ 2. 在Fork出来的仓库页面上点击Setting，勾选Template repository。
+ 3. 然后点击Code返回之前的页面，点Setting下面新出现的按钮Use this template，起个随机名字创建新库。
+ 4. 比如你的Github用户名是bobby，新库名称是green。浏览器登陆heroku后，访问https://dashboard.heroku.com/new?template=https://github.com/bobby/green 即可部署。
+ 
  **Github Action 自动部署方式**
  
  详细指南见：https://github.com/AkhileshNS/heroku-deploy
@@ -46,14 +54,8 @@
  
  如果从公开库部署，建议把用户名/密码等其它变量也加入secrets，修改/.github/workflows/heroku-deploy-release.yml文件，参照RCLONE_CONFIG_BASE64的写法调用。
  
- Secrets和变量设置好以后，点击Releases，选Draft a new release，tag填 v*.\*.\* 的格式，即可触发自动部署。
-
- **Heroku修复安全漏洞中，目前无法通过网页从私有库部署**
- **网页部署方式**
- 1. 点击右上角Fork，再点击Creat Fork。
- 2. 在Fork出来的仓库页面上点击Setting，勾选Template repository。
- 3. 然后点击Code返回之前的页面，点Setting下面新出现的按钮Use this template，起个随机名字创建新库。
- 4. 比如你的Github用户名是bobby，新库名称是green。浏览器登陆heroku后，访问https://dashboard.heroku.com/new?template=https://github.com/bobby/green 即可部署。
+ Secrets和变量设置好以后，点击Releases，选Draft a new release，tag填 v*.\*.\* 的格式，即可触发自动部署。  
+ 
 ### 变量设置
 对部署时需设定的变量名称做如下说明。
 | 变量 | 默认值 | 说明 |
