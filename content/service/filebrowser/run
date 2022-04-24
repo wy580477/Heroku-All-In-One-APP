@@ -12,7 +12,7 @@ else
     DRIVENAME=${DRIVE_NAME}
 fi
 
-rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/filebrowser.db /mnt/data/config/ 2>/dev/null
+rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/filebrowser.db /mnt/data/config/ 2>/dev/null
 
 # Configure filebrowser
 if [ ! -f "/mnt/data/config/filebrowser.db" ]; then
