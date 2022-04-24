@@ -2,7 +2,7 @@
 
 sleep 300
 
-DRIVE_NAME_AUTO="$(sed -n '1p' /.aria2allinoneworkdir/drive.conf | sed "s/\[//g" | sed "s/\]//g")"
+DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
 if [ "${DRIVE_NAME}" = "auto" ]; then
     DRIVENAME=${DRIVE_NAME_AUTO}
 else 
@@ -10,7 +10,8 @@ else
 fi
 
 exec 2>&1
-rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/aria2/aria2.session "${DRIVENAME}":/herokuallinoneapp/
-rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/aria2/dht.dat "${DRIVENAME}":/herokuallinoneapp/
-rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/filebrowser.db "${DRIVENAME}":/herokuallinoneapp/
-rclone move --config /.aria2allinoneworkdir/drive.conf /.aria2allinoneworkdir/aria2/aria2.conf "${DRIVENAME}":/herokuallinoneapp/
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/movefile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=aria2.session dstFs="${DRIVENAME}":/herokuallinoneapp dstRemote=aria2.session _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/movefile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=dht.dat dstFs="${DRIVENAME}":/herokuallinoneapp dstRemote=dht.dat _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/movefile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=aria2.conf dstFs="${DRIVENAME}":/herokuallinoneapp dstRemote=aria2.conf _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/movefile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=script.conf dstFs="${DRIVENAME}":/herokuallinoneapp dstRemote=script.conf _async=true
+rclone rc --user "${USER}" --pass "${PASSWORD}" --rc-addr=localhost:56802 operations/movefile srcFs=/.aria2allinoneworkdir srcRemote=filebrowser.db dstFs="${DRIVENAME}":/herokuallinoneapp dstRemote=filebrowser.db _async=true
