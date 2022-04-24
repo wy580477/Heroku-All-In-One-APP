@@ -8,6 +8,14 @@ fi
 # Configure aria2
 touch /.aria2allinoneworkdir/aria2/aria2.session
 mkdir -p /mnt/data/config /mnt/data/downloads
+
+DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
+if [ "${DRIVE_NAME}" = "auto" ]; then
+    DRIVENAME=${DRIVE_NAME_AUTO}
+else 
+    DRIVENAME=${DRIVE_NAME}
+fi
+
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.conf /mnt/data/config/ 2>/dev/null
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.session /.aria2allinoneworkdir/aria2/ 2>/dev/null
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/dht.dat /.aria2allinoneworkdir/aria2/ 2>/dev/null
