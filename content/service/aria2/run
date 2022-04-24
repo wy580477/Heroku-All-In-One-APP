@@ -8,10 +8,10 @@ fi
 # Configure aria2
 touch /.aria2allinoneworkdir/aria2/aria2.session
 mkdir -p /mnt/data/config /mnt/data/downloads
-rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/herokuallinoneapp/aria2.conf /mnt/data/config/ 2>/dev/null
-rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/herokuallinoneapp/aria2.session /.aria2allinoneworkdir/aria2/ 2>/dev/null
-rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/herokuallinoneapp/dht.dat /.aria2allinoneworkdir/aria2/ 2>/dev/null
-rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/herokuallinoneapp/script.conf /mnt/data/config/ 2>/dev/null
+rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.conf /mnt/data/config/ 2>/dev/null
+rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.session /.aria2allinoneworkdir/aria2/ 2>/dev/null
+rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/dht.dat /.aria2allinoneworkdir/aria2/ 2>/dev/null
+rclone move --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/script.conf /mnt/data/config/ 2>/dev/null
 
 if [ ! -f "/mnt/data/config/aria2.conf" ]; then
        cp /.aria2allinoneworkdir/aria2/aria2_${LANGUAGE}.conf /mnt/data/config/aria2.conf
