@@ -2,7 +2,8 @@
 
 sleep 60
 
-while (($(date +%H%M) != "${RESTART_TIME/:/}")); do
+DATE=$(date +%H%M | sed 's/^0//g')
+while [ "${DATE}" != "${RESTART_TIME/:/}" ]; do
   sleep 10
 done
 
