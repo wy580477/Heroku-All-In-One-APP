@@ -11,9 +11,11 @@ RUN apk add --no-cache curl caddy jq bash findutils runit aria2 rclone apache2-u
     && sed -i 's|6800|443|g' /.aria2allinoneworkdir/ariang/js/aria-ng-f1dd57abb9.min.js \
     && curl -fsSL https://raw.githubusercontent.com/wy580477/filebrowser-install/master/get.sh | bash \
     && chmod +x /.aria2allinoneworkdir/service/*/run /.aria2allinoneworkdir/service/*/log/run /.aria2allinoneworkdir/aria2/*.sh /.aria2allinoneworkdir/*.sh \
+    && mv /.aria2allinoneworkdir/ytdlptorclone.sh /usr/bin/ \
+    && mv /.aria2allinoneworkdir/bashrc /mnt/data/config/ \
     && ln -s /.aria2allinoneworkdir/service/* /etc/service/
 
 ENV DOWNLOAD_DIR=/mnt/data/videos
-ENV STATE_DIR=/mnt/data/videos/.metube
+ENV STATE_DIR=/.aria2allinoneworkdir/.metube
 
 ENTRYPOINT ["sh","/.aria2allinoneworkdir/entrypoint.sh"]
