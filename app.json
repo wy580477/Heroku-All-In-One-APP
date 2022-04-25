@@ -59,11 +59,6 @@
             "required": false,
             "value": ""
         },
-        "YTDL_OPTIONS": {
-            "description": "metube yt-dlp options",
-            "required": false,
-            "value": {"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}]}
-        },
         "OUTPUT_TEMPLATE": {
             "description": "metube yt-dlp output template",
             "required": false,
