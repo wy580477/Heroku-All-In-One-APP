@@ -50,7 +50,7 @@
             "value": "6:00"
         },
         "HEROKU_APP_NAME": {
-            "description": "Name of this heroku app. Optional. It's used for refreshing rclone token from within dyno.",
+            "description": "Name of this heroku app.",
             "required": false,
             "value": ""
         },
