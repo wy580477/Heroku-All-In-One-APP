@@ -13,4 +13,7 @@ RUN apk add --no-cache curl caddy jq bash findutils runit aria2 rclone apache2-u
     && chmod +x /.aria2allinoneworkdir/service/*/run /.aria2allinoneworkdir/service/*/log/run /.aria2allinoneworkdir/aria2/*.sh /.aria2allinoneworkdir/*.sh \
     && ln -s /.aria2allinoneworkdir/service/* /etc/service/
 
+ENV DOWNLOAD_DIR=/mnt/data/videos
+ENV STATE_DIR=/mnt/data/videos/.metube
+
 ENTRYPOINT ["sh","/.aria2allinoneworkdir/entrypoint.sh"]

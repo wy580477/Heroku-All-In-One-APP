@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cd /app
+exec 2>&1
+exec python3 /app/app/main.py

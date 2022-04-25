@@ -76,6 +76,12 @@ services:
   - name: "Applications"
     icon: "fas fa-cloud"
     items:
+      - name: "metube"
+        logo: "./assets/tools/metube.png"
+        subtitle: "Web GUI for yt-dlp"
+        tag: "app"
+        url: "PORTAL_PATH/metube"
+        target: "_blank" # optional html a tag target attribute
       - name: "AriaNg"
         logo: "./assets/tools/AriaNg.ico"
         subtitle: "Web frontend for Aria2"

@@ -61,6 +61,15 @@ handle {$PORTAL_PATH}/jsonrpc {
 handle {$PORTAL_PATH}/files* {
         reverse_proxy {$PORTAL_PATH}/files* localhost:56801
 }
+# Configure metube
+handle {$PORTAL_PATH}/metube* {
+        redir {$PORTAL_PATH}/metube {$PORTAL_PATH}/metube/         
+        uri strip_prefix {$PORTAL_PATH}/metube
+        basicauth {
+                {$USER} HASH
+        }
+        reverse_proxy * localhost:8081
+}
 # Configure homer
 handle {$PORTAL_PATH}* {  
         redir {$PORTAL_PATH} {$PORTAL_PATH}/         
