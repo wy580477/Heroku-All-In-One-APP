@@ -1,10 +1,11 @@
 ## 鸣谢
-- [alexta69/metube](https://github.com/alexta69/metube) 简洁好用的yt-dlp前端，自定义参数很方便。
-- [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  依靠来自P3TERX大佬的Aria2脚本，实现了Aria2下载完成自动触发Rclone上传。
-- [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路，解决了Heroku使用变量导入Rclone配置文件的难题。
-- [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，非常便于自定义。
+- [alexta69/metube](https://github.com/alexta69/metube) 简洁好用的yt-dlp前端。
+- [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  依靠来自P3TERX的Aria2脚本，实现了Aria2下载完成自动触发Rclone上传。
+- [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路。
+- [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，便于自定义。
+- [mayswind/AriaNg](https://github.com/mayswind/AriaNg) | [filebrowser/filebrowser](https://github.com/filebrowser/filebrowser) | [aria2/aria2](https://github.com/aria2/aria2) | [rclone/rclone](https://github.com/rclone/rclone) | [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp)
 ## 注意
- 1. **本项目仅为学习用途，请勿滥用，重度使用可能导致账号被封。类似 Heroku 的免费服务少之又少，且用且珍惜。**
+ 1. **请勿滥用，重度使用可能导致账号被封。**
  2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合长期BT下载和共享文件用途。
  3. Aria2配置文件默认限速5MB/s。
  4. 免费Heroku dyno半小时无Web访问会休眠，可以使用[Helixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
@@ -59,24 +60,24 @@
 | `VMESS_PATH` | `/f495ba1f` | Vmess协议路径，不要包含敏感信息 |
 | `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
 | `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
-| `HEROKU_APP_NAME` | `` | Heroku APP名称，可选项，用于从dyno内部更新rclone配置文件变量。 |
+| `HEROKU_APP_NAME` | `` | Heroku APP名称。 |
 | `RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，用于配合上面两个变量，dyno也同时重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
 | `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}]}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
 | `OUTPUT_TEMPLATE` | `%(title)s_%(uploader)s_%(id)s.%(ext)s` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
 | `POST_MODE` | `move_remote` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |  
 
- 1. dummy模式为无操作，move模式为下载及做种完成后移动到本地finished目录。
- 2. move_remote模式为下载及做种完成后先移动到本地data数据卷下finished目录，然后移动到rclone远程存储。
- 3. move_remote_only模式为下载及做种完成后移动到rclone远程存储。
- 4. copy_remote_first模式为下载完成后立即复制到rclone远程存储，BT任务在做种前即触发。
- 5. copy_remote模式为下载及做种完成后先移动到本地finished目录，然后复制到rclone远程存储。
- 6. custom模式为自行设置aria2配置文件触发脚本选项。  
-
+ 1. dummy模式为无操作，move模式为Aria2下载及做种完成后移动到本地finished目录。
+ 2. move_remote模式为Aria2下载及做种完成后先移动到本地data数据卷下finished目录，然后移动到rclone远程存储。
+ 3. move_remote_only模式为Aria2下载及做种完成后移动到rclone远程存储。
+ 4. copy_remote_first模式为Aria2下载完成后立即复制到rclone远程存储，BT任务在做种前即触发。
+ 5. copy_remote模式为Aria2下载及做种完成后先移动到本地finished目录，然后复制到rclone远程存储。
+ 6. custom模式为自行设置Aria2配置文件触发脚本选项。   
+ 
  两种move模式下mutube以及dlpr指令下载完成后会移动文件至rclone远程存储，两种copy模式下则为复制。  
  
 ### 初次使用
  1. 部署完成后，比如你的heroku域名是bobby.herokuapp.com，导航页路径是/portal，访问bobby.herokuapp.com/portal 即可到达导航页。
- 2. 点击AriaNg，这时会弹出认证失败警告，不要慌，按下图把之前部署时设置的密码填入RPC密钥即可。
+ 2. 点击AriaNg，这时会弹出认证失败警告，按下图把之前部署时设置的密码填入RPC密钥即可。
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
  3. yt-dlp下载工具可以通过ttyd在网页终端执行，使用方法详细见：https://github.com/yt-dlp/yt-dlp#usage-and-options  
     内置快捷指令：  
@@ -93,8 +94,8 @@ type = alias
 remote = /mnt/data
 ```
  6. 无法通过Rclone Web前端建立需要网页认证的存储配置。
- 7. 个别标题有特殊字符的视频rclone可能无法上传，需要在YTDL_OPTIONS变量中添加："restrictfilenames":true
- 8. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
+ 7. 个别标题有特殊字符的视频metube下载后rclone可能无法上传，需要在YTDL_OPTIONS变量中添加："restrictfilenames":true
+ 8. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件，可以设置aria2清理文件方式和Rclone上传目录。
  9. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
  10. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
  11. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。Heroku国内直连很难，需要使用Cloudflare或其它方式中转。
