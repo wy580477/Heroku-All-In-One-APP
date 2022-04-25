@@ -71,7 +71,7 @@
 | `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
 | `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
 | `HEROKU_APP_NAME` | `` | Heroku APP名称，可选项，用于从dyno内部更新rclone配置文件变量。 |
-| `RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，用于配合上面两个变量，dyno也同时重启。格式为06:00，24小时制，时区为TZ变量所指定的时区。 |
+| `RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，用于配合上面两个变量，dyno也同时重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
 
 对控制Aria2和Rclone联动模式的POST_MODE变量说明：
  1. dummy模式为无操作，move模式为下载及做种完成后移动到本地finished目录。
