@@ -2,7 +2,7 @@
 
 sleep 60
 
-while (($(date +%H%M) != "${RESTART_TIME/:/}")); do
+while [ "$(date +%H%M)" != "${RESTART_TIME/:/}" ]; do
   sleep 10
 done
 
