@@ -1,9 +1,11 @@
 ## 鸣谢
-- [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  依靠来自P3TERX大佬的Aria2脚本，实现了Aria2下载完成自动触发Rclone上传。
-- [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路，解决了Heroku使用变量导入Rclone配置文件的难题。
-- [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，非常便于自定义。
+- [alexta69/metube](https://github.com/alexta69/metube) 简洁好用的yt-dlp前端。
+- [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  依靠来自P3TERX的Aria2脚本，实现了Aria2下载完成自动触发Rclone上传。
+- [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路。
+- [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，便于自定义。
+- [mayswind/AriaNg](https://github.com/mayswind/AriaNg) | [filebrowser/filebrowser](https://github.com/filebrowser/filebrowser) | [aria2/aria2](https://github.com/aria2/aria2) | [rclone/rclone](https://github.com/rclone/rclone) | [iawia002/lux](https://github.com/iawia002/lux)
 ## 注意
- 1. **本项目仅为学习用途，请勿滥用，重度使用可能导致账号被封。类似 Heroku 的免费服务少之又少，且用且珍惜。**
+ 1. **请勿滥用，重度使用可能导致账号被封。**
  2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合长期BT下载和共享文件用途。
  3. Aria2配置文件默认限速5MB/s。
  4. 免费Heroku dyno半小时无Web访问会休眠，可以使用[Helixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
@@ -72,8 +74,8 @@
 | `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
 | `HEROKU_APP_NAME` | `` | Heroku APP名称，可选项，用于从dyno内部更新rclone配置文件变量。 |
 | `RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，用于配合上面两个变量，dyno也同时重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
+| `POST_MODE` | `move_remote` | 控制Aria2和Rclone联动模式,详细说明见下方。 |
 
-对控制Aria2和Rclone联动模式的POST_MODE变量说明：
  1. dummy模式为无操作，move模式为下载及做种完成后移动到本地finished目录。
  2. move_remote模式为下载及做种完成后先移动到本地data数据卷下finished目录，然后移动到rclone远程存储。
  3. move_remote_only模式为下载及做种完成后移动到rclone远程存储。
@@ -82,7 +84,7 @@
  6. custom模式为自行设置aria2配置文件触发脚本选项。
 ### 初次使用
  1. 部署完成后，比如你的heroku域名是bobby.herokuapp.com，导航页路径是/portal，访问bobby.herokuapp.com/portal 即可到达导航页。
- 2. 点击AriaNg，这时会弹出认证失败警告，不要慌，按下图把之前部署时设置的密码填入RPC密钥即可。
+ 2. 点击AriaNg，这时会弹出认证失败警告，按下图把之前部署时设置的密码填入RPC密钥即可。
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
  3. lux多视频站下载工具通过ttyd网页终端执行，使用方法详细见：https://github.com/iawia002/lux  
     内置快捷指令：  
@@ -92,16 +94,15 @@
  1. Heroku每24小时重启后恢复到部署时文件系统，尽管配置文件会自动备份和尝试恢复，除了变量外任何改动都建议在部署前在github仓库内修改。
  2. 修改Heroku app变量方法：在Heroku app页面上点击setting，再点击Reveal Config Vars即可修改。
  3. 自动更新rclone配置文件token，需要指定HEROKU_API_KEY、HEROKU_APP_NAME、RESTART_TIME三个变量，而且dyno在指定的RESTART_TIME时间必须正在运行。
- 4. RESTART_TIME变量指定dyno重启时间，需要HEROKU_API_KEY和HEROKU_APP_NAME变量配合才能工作。Dyno的重启不是严格遵循24小时间隔，前后有一定误差，所以仍可能在指定的时间之前一小段时间重启。
+ 4. RESTART_TIME变量指定dyno重启时间，需要HEROKU_API_KEY和HEROKU_APP_NAME变量配合才能工作。
  5. Rclone配置文件末尾加上如下内容，可以在Rclone Web前端中挂载本地存储，方便手动上传。
 ```
 [local]
 type = alias
 remote = /mnt/data
 ```
- 6. Rclone Web前端手动传输文件方法是点击页面左侧Explorer，然后选双版面布局，打开两个Rclone存储配置，直接拖动文件即可。
- 7. 无法通过Rclone Web前端建立需要网页认证的存储配置。
- 8. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件。修改script.conf可以设置aria2清理文件方式和Rclone上传目录。
- 9. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
- 10. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
- 11. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。Heroku国内直连很难，需要使用Cloudflare或其它方式中转。
+ 6. 无法通过Rclone Web前端建立需要网页认证的存储配置。
+ 7. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件，可以设置aria2清理文件方式和Rclone上传目录。
+ 8. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
+ 9. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
+ 10. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。Heroku国内直连很难，需要使用Cloudflare或其它方式中转。
