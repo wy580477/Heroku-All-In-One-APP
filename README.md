@@ -82,7 +82,7 @@
     内置快捷指令：  
     dlpr：使用yt-dlp下载视频到videos文件夹下，下载完成后可发送任务到rclone，受POST_MODE变量控制。  
 ### 更多用法和注意事项
- 1. Heroku每24小时重启后恢复到部署时文件系统，尽管配置文件会自动备份和尝试恢复，除了变量外任何改动都建议在部署前在github仓库内修改。
+ 1. Heroku每24小时重启后恢复到部署时文件系统，尽管config文件夹下配置文件会自动备份和尝试恢复，除了变量外任何改动都建议在部署前在github仓库内修改。
  2. 修改Heroku app变量方法：在Heroku app页面上点击setting，再点击Reveal Config Vars即可修改。
  3. 自动更新rclone配置文件token，需要指定HEROKU_API_KEY、HEROKU_APP_NAME、RESTART_TIME三个变量，而且dyno在指定的RESTART_TIME时间必须正在运行。
  4. RESTART_TIME变量指定dyno重启时间，需要HEROKU_API_KEY和HEROKU_APP_NAME变量配合才能工作。
