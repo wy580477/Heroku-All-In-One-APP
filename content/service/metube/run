@@ -1,5 +1,7 @@
 #!/bin/sh
 
+rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/queue /.aria2allinoneworkdir/.metube/ 2>/dev/null
+
 cd /app
 exec 2>&1
 exec python3 /app/app/main.py

@@ -4,8 +4,18 @@ sleep 60
 
 DATE=$(date +%H%M | sed 's/^0//g')
 while [ "${DATE}" != "${RESTART_TIME/:/}" ]; do
-  sleep 10
+  sleep 1
 done
+
+DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
+if [ "${DRIVE_NAME}" = "auto" ]; then
+    DRIVENAME=${DRIVE_NAME_AUTO}
+else
+    DRIVENAME=${DRIVE_NAME}
+fi
+
+rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/aria2/aria2.session "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
+rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/.metube/queue "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
 
 CONF=$(base64 /mnt/data/config/rclone.conf)
 if [ "${HEROKU_API_KEY}" != "" ]; then
