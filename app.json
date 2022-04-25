@@ -47,7 +47,7 @@
         "RESTART_TIME": {
             "description": "Dyno restart time. Optional. It's used for refreshing rclone token from within dyno.",
             "required": false,
-            "value": "6:00"
+            "value": ""
         },
         "HEROKU_APP_NAME": {
             "description": "Name of this heroku app.",
