@@ -62,7 +62,7 @@
 | `HEROKU_APP_NAME` | `` | Heroku APP名称，可选项，用于从dyno内部更新rclone配置文件变量。 |
 | `RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，用于配合上面两个变量，dyno也同时重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
 | `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}]}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
-| `OUTPUT_TEMPLATE` | `` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
+| `OUTPUT_TEMPLATE` | `%(title)s_%(uploader)s_%(id)s.%(ext)s` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
 | `POST_MODE` | `move_remote` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |  
 
  1. dummy模式为无操作，move模式为下载及做种完成后移动到本地finished目录。
