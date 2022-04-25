@@ -5,8 +5,9 @@ if [ "${MODE}" = "build" ]; then
   sleep infinity
 fi
 
-# Configure AriaNG
+# Configure AriaNG & Rclone WebUI
 sed -i 's|rpcInterface:"jsonrpc"|rpcInterface:"'"${PORTAL_PATH/\//}"'/jsonrpc"|g' /.aria2allinoneworkdir/ariang/js/aria-ng-f1dd57abb9.min.js
+sed -i 's|ipAddress:a|ipAddress:`${window.location.protocol}//${window.location.hostname}'"${PORTAL_PATH}"'/rclonerc`|g' /.aria2allinoneworkdir/rcloneweb/build/static/js/3.90421092.chunk.js
 
 # Configure homer
 cp /.aria2allinoneworkdir/homer_conf/* /.aria2allinoneworkdir/homer/assets/tools/
