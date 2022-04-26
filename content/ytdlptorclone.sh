@@ -1,7 +1,7 @@
 #!/bin/sh
 
-DRIVE_NAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
-DRIVE_DIR="$(grep ^drive-dir /mnt/config/aria2/script.conf | cut -d= -f2-)"
+DRIVE_NAME="$(grep ^drive-name /mnt/config/script.conf | cut -d= -f2-)"
+DRIVE_DIR="$(grep ^drive-dir /mnt/config/script.conf | cut -d= -f2-)"
 REMOTE_PATH="${DRIVE_NAME}:${DRIVE_DIR}"
 FILEPATH=$(echo $1 | sed 's:[^/]*$::')
 FILENAME=$(echo $1 | sed 's:/.*/::')
