@@ -108,9 +108,9 @@ READ_ARIA2_CONF() {
 
 RPC_TASK_INFO() {
     if [[ "${RPC_SECRET}" ]]; then
-        RPC_PAYLOAD='{"jsonrpc":"2.0","method":"aria2.tellStatus","id":"P3TERX","params":["token:'"${PASSWORD}"'","'${TASK_GID}'"]}'
+        RPC_PAYLOAD='{"jsonrpc":"2.0","method":"aria2.tellStatus","id":"P3TERX","params":["token:'"${GLOBAL_PASSWORD}"'","'${TASK_GID}'"]}'
     else
-        RPC_PAYLOAD='{"jsonrpc":"2.0","method":"aria2.tellStatus","id":"P3TERX","params":["token:'"${PASSWORD}"'","'${TASK_GID}'"]}'
+        RPC_PAYLOAD='{"jsonrpc":"2.0","method":"aria2.tellStatus","id":"P3TERX","params":["token:'"${GLOBAL_PASSWORD}"'","'${TASK_GID}'"]}'
     fi
     curl "${RPC_ADDRESS}" -fsSd "${RPC_PAYLOAD}" || curl "https://${RPC_ADDRESS}" -kfsSd "${RPC_PAYLOAD}"
 }

@@ -6,7 +6,7 @@ if [ "${MODE}" = "build" ]; then
 fi
 
 # Run rclone
-htpasswd -csb /.aria2allinoneworkdir/htpasswd ${USER} ${PASSWORD}
+htpasswd -csb /.aria2allinoneworkdir/htpasswd ${GLOBAL_USER} ${GLOBAL_PASSWORD}
 exec 2>&1
 exec rclone rcd --rc-serve \
 --rc-web-gui-no-open-browser \

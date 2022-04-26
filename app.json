@@ -3,27 +3,27 @@
     "description": "Deploy",
     "keywords": ["Deploy"],
     "env": {
-        "USER": {
-            "description": "User name",
+        "GLOBAL_USER": {
+            "description": "Username",
             "value": "admin"
         },        
-        "PASSWORD": {
+        "GLOBAL_PASSWORD": {
             "description": "Password, double as Aria2 RPC token",
             "value": "password"
         },
-        "LANGUAGE": {
-            "description": "language(en or chs)",
+        "GLOBAL_LANGUAGE": {
+            "description": "Set language of portal page & filebrowser.(en or chs)",
             "value": "en"
         },
-        "PORTAL_PATH": {
+        "GLOBAL_PORTAL_PATH": {
             "description": "Portal page & base URL for all web services",
             "value": "/portal"
         },
-        "POST_MODE": {
+        "RCLONE_AUTO_MODE": {
             "description": "Aria2 Event Hook mode, this also controls file operation after metube downloads completed",
             "value": "move_remote"
         },
-        "DRIVE_NAME": {
+        "RCLONE_DRIVE_NAME": {
             "description": "Rclone remote name for auto-uploading",
             "value": "auto"
         },
@@ -32,22 +32,9 @@
             "required": false,
             "value": ""
         },
-        "VMESS_UUID": {
-            "description": "Vmess UUID",
-            "value": "a3ac20a7-45fe-4656-97ee-937ffec46144"
-        },
-        "VMESS_PATH": {
-            "description": "Vmess Websocket Path",
-            "value": "/f495ba1f"
-        },
         "TZ": {
             "description": "Timezone",
             "value": "UTC"
-        },
-        "RESTART_TIME": {
-            "description": "Dyno restart time. Optional. It's used for refreshing rclone token from within dyno.",
-            "required": false,
-            "value": ""
         },
         "HEROKU_APP_NAME": {
             "description": "Name of this heroku app.",
@@ -59,12 +46,25 @@
             "required": false,
             "value": ""
         },
+        "HEROKU_RESTART_TIME": {
+            "description": "Dyno restart time. Optional. It's used for refreshing rclone token from within dyno.",
+            "required": false,
+            "value": ""
+        },
+        "VMESS_UUID": {
+            "description": "Vmess UUID",
+            "value": "a3ac20a7-45fe-4656-97ee-937ffec46144"
+        },
+        "VMESS_PATH": {
+            "description": "Vmess Websocket Path",
+            "value": "/f495ba1f"
+        },
         "YTDL_OPTIONS": {
             "description": "metube yt-dlp options",
             "required": false,
             "value": "{\"postprocessors\":[{\"key\":\"Exec\",\"exec_cmd\":\"ytdlptorclone.sh\"}]}"
         },
-        "OUTPUT_TEMPLATE": {
+        "YTDL_OUTPUT_TEMPLATE": {
             "description": "metube yt-dlp output template",
             "required": false,
             "value": "%(title)s_%(uploader)s_%(id)s.%(ext)s"

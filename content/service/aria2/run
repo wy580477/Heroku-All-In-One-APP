@@ -9,10 +9,10 @@ fi
 touch /.aria2allinoneworkdir/aria2/aria2.session
 
 DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
-if [ "${DRIVE_NAME}" = "auto" ]; then
+if [ "${RCLONE_DRIVE_NAME}" = "auto" ]; then
        DRIVENAME=${DRIVE_NAME_AUTO}
 else
-       DRIVENAME=${DRIVE_NAME}
+       DRIVENAME=${RCLONE_DRIVE_NAME}
 fi
 
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.conf /mnt/data/config/ 2>/dev/null
@@ -21,7 +21,7 @@ rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/script.conf /mnt/data/config/ 2>/dev/null
 
 if [ ! -f "/mnt/data/config/aria2.conf" ]; then
-       cp /.aria2allinoneworkdir/aria2/aria2_${LANGUAGE}.conf /mnt/data/config/aria2.conf
+       cp /.aria2allinoneworkdir/aria2/aria2_${GLOBAL_LANGUAGE}.conf /mnt/data/config/aria2.conf
 fi
 
 if [ ! -f "/mnt/data/config/script.conf" ]; then
@@ -31,16 +31,16 @@ fi
 /.aria2allinoneworkdir/aria2/tracker.sh /mnt/data/config/aria2.conf 2>/dev/null
 sed -i "s|^drive-name=.*|drive-name=${DRIVENAME}|g" /mnt/data/config/script.conf
 
-if [ "${POST_MODE}" = "copy_remote_first" ]; then
-       sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/"${POST_MODE}".sh|g" /mnt/data/config/aria2.conf
+if [ "${RCLONE_AUTO_MODE}" = "copy_remote_first" ]; then
+       sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/"${RCLONE_AUTO_MODE}".sh|g" /mnt/data/config/aria2.conf
        sed -i "s|^on-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-download-complete=/.aria2allinoneworkdir/aria2/copy_remote_other.sh|g" /mnt/data/config/aria2.conf
-elif [ "${POST_MODE}" = "dummy" ]; then
+elif [ "${RCLONE_AUTO_MODE}" = "dummy" ]; then
        sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/clean.sh|g" /mnt/data/config/aria2.conf
        sed -i "s|^on-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-download-complete=/.aria2allinoneworkdir/aria2/clean.sh|g" /mnt/data/config/aria2.conf
-elif [ "${POST_MODE}" = "custom" ]; then
+elif [ "${RCLONE_AUTO_MODE}" = "custom" ]; then
        :
 else
-       sed -i "s|^on-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-download-complete=/.aria2allinoneworkdir/aria2/"${POST_MODE}".sh|g" /mnt/data/config/aria2.conf
+       sed -i "s|^on-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-download-complete=/.aria2allinoneworkdir/aria2/"${RCLONE_AUTO_MODE}".sh|g" /mnt/data/config/aria2.conf
        sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/clean.sh|g" /mnt/data/config/aria2.conf
 fi
 
@@ -48,7 +48,7 @@ fi
 exec 2>&1
 exec aria2c --conf-path="/mnt/data/config/aria2.conf" \
 --enable-rpc \
---rpc-secret=${PASSWORD} \
+--rpc-secret=${GLOBAL_PASSWORD} \
 --rpc-listen-port=56800 \
 --show-console-readout false \
 --enable-mmap true
