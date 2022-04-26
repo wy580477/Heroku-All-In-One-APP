@@ -41,6 +41,11 @@
             "required": false,
             "value": ""
         },
+        "HEROKU_KEEP_AWAKE": {
+            "description": "Set value to true for preventing dyno from auto-sleeping.",
+            "required": false,
+            "value": ""
+        },
         "HEROKU_API_KEY": {
             "description": "Your heroku api key. Optional. It's used for refreshing rclone token from within dyno.",
             "required": false,

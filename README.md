@@ -60,6 +60,7 @@
 | `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
 | `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
 | `HEROKU_APP_NAME` | `` | Heroku APP名称。 |
+| `HEROKU_KEEP_AWAKE` | `` | 设置为"true"可以阻止dyno空闲时休眠。 |
 | `HEROKU_RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，用于配合上面两个变量，dyno也同时重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
 | `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}]}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
 | `YTDL_OUTPUT_TEMPLATE` | `%(title)s_%(uploader)s_%(id)s.%(ext)s` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
