@@ -7,7 +7,7 @@ fi
 
 # Configure aria2
 touch /.aria2allinoneworkdir/aria2/aria2.session
-DRIVENAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
+DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.conf /mnt/data/config/ 2>/dev/null
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.session /.aria2allinoneworkdir/aria2/ 2>/dev/null
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/dht.dat /.aria2allinoneworkdir/aria2/ 2>/dev/null

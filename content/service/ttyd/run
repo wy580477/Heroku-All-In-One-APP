@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DRIVENAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
+DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/bashrc /mnt/data/config/bashrc 2>/dev/null
 
 exec 2>&1

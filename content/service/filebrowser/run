@@ -6,7 +6,7 @@ if [ "${MODE}" = "build" ]; then
 fi
 
 # Configure filebrowser
-DRIVENAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
+DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/filebrowser.db /mnt/data/config/ 2>/dev/null
 
 if [ ! -f "/mnt/data/config/filebrowser.db" ]; then

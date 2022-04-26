@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sleep 600
-DRIVENAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
+DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 
 exec 2>&1
 

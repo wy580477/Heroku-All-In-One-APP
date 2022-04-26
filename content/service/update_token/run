@@ -7,7 +7,7 @@ while [ "${DATE}" != "${HEROKU_RESTART_TIME/:/}" ]; do
   sleep 1
 done
 
-DRIVENAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
+DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/aria2/aria2.session "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
 rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/.metube/queue "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
 
