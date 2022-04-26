@@ -40,13 +40,13 @@ outbounds:
 EOF
 
 # Get Ray executable release
-wget -O - https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip | busybox unzip -d ${DIR_TMP} -
+wget -qO - https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip | busybox unzip -qd ${DIR_TMP} -
 
 # Install Ray
 install -m 755 ${DIR_TMP}/xray ${DIR_RUNTIME}/ray
 rm -rf ${DIR_TMP}
-curl --retry 10 --retry-max-time 60 https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -o ${DIR_RUNTIME}/geoip.dat
-curl --retry 10 --retry-max-time 60 https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -o ${DIR_RUNTIME}/geosite.dat
+curl -s --retry 10 --retry-max-time 60 https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -o ${DIR_RUNTIME}/geoip.dat
+curl -s --retry 10 --retry-max-time 60 https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -o ${DIR_RUNTIME}/geosite.dat
 
 # Run Ray
 exec ${DIR_RUNTIME}/ray -config=/.aria2allinoneworkdir/ray.yaml

@@ -1,11 +1,6 @@
 #!/bin/bash
 
-DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
-if [ "${RCLONE_DRIVE_NAME}" = "auto" ]; then
-    DRIVENAME=${DRIVE_NAME_AUTO}
-else 
-    DRIVENAME=${RCLONE_DRIVE_NAME}
-fi
+DRIVENAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
 
 if [ "${RCLONE_AUTO_MODE}" = "dummy" ]; then
     sed -i "s|MODE_STATUS|</b>|g" /.aria2allinoneworkdir/homer/assets/config.yml
