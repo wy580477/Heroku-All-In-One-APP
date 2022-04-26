@@ -11,14 +11,9 @@ DRIVENAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.conf /mnt/data/config/ 2>/dev/null
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/aria2.session /.aria2allinoneworkdir/aria2/ 2>/dev/null
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/dht.dat /.aria2allinoneworkdir/aria2/ 2>/dev/null
-rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/script.conf /mnt/data/config/ 2>/dev/null
 
 if [ ! -f "/mnt/data/config/aria2.conf" ]; then
        cp /.aria2allinoneworkdir/aria2/aria2_${GLOBAL_LANGUAGE}.conf /mnt/data/config/aria2.conf
-fi
-
-if [ ! -f "/mnt/data/config/script.conf" ]; then
-       cp /.aria2allinoneworkdir/aria2/script.conf /mnt/data/config/script.conf
 fi
 
 /.aria2allinoneworkdir/aria2/tracker.sh /mnt/data/config/aria2.conf 2>/dev/null
