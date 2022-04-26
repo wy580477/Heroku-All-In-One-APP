@@ -16,6 +16,7 @@ RUN apk add --no-cache curl caddy jq bash findutils runit aria2 rclone apache2-u
 
 ENV DOWNLOAD_DIR=/mnt/data/videos
 ENV STATE_DIR=/.aria2allinoneworkdir/.metube
+ENV YTDL_OPTIONS="{\"postprocessors\":[{\"key\":\"Exec\",\"exec_cmd\":\"ytdlptorclone.sh\"}]}"
 ENV OUTPUT_TEMPLATE="%(title)s_%(uploader)s_%(id)s.%(ext)s"
 
 ENTRYPOINT ["sh","/.aria2allinoneworkdir/entrypoint.sh"]
