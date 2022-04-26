@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sleep 300
+sleep 600
 
 DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
 if [ "${DRIVE_NAME}" = "auto" ]; then
