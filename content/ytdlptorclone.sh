@@ -1,18 +1,25 @@
 #!/bin/sh
 
-DRIVE_NAME_AUTO="$(sed -n '1p' /mnt/data/config/rclone.conf | sed "s/\[//g" | sed "s/\]//g")"
-if [ "${RCLONE_DRIVE_NAME}" = "auto" ]; then
-    DRIVENAME=${DRIVE_NAME_AUTO}
-else
-    DRIVENAME=${RCLONE_DRIVE_NAME}
-fi
-
-DRIVE_DIR="$(grep ^drive-dir /mnt/data/config/script.conf | cut -d= -f2-)"
+DRIVE_NAME="$(grep ^drive-name /mnt/config/aria2/script.conf | cut -d= -f2-)"
+DRIVE_DIR="$(grep ^drive-dir /mnt/config/aria2/script.conf | cut -d= -f2-)"
+REMOTE_PATH="${DRIVE_NAME}:${DRIVE_DIR}"
 FILEPATH=$(echo $1 | sed 's:[^/]*$::')
 FILENAME=$(echo $1 | sed 's:/.*/::')
 
 if [[ "${RCLONE_AUTO_MODE}" =~ "move" ]]; then
-    rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:56802 operations/movefile srcFs="${FILEPATH}" srcRemote="${FILENAME}" dstFs="${DRIVENAME}":"${DRIVE_DIR}" dstRemote="${FILENAME}" _async=true
+    curl -s -S -u ${USER}:${PASSWORD} -H "Content-Type: application/json" -f -X POST -d '{"srcFs":"'"${FILEPATH}"'","srcRemote":"'"${FILENAME}"'","dstFs":"'"${REMOTE_PATH}"'","dstRemote":"'"${FILENAME}"'","_async":"true"}' ''${RCLONE_ADDR}'/operations/movefile'
+    EXIT_CODE=$?
+    if [ ${EXIT_CODE} -eq 0 ]; then
+        echo "[INFO] Successfully send job to rclone: $1 -> ${REMOTE_PATH}"
+    else
+        echo "[ERROR] Failed to send job to rclone: $1"
+    fi
 elif [[ "${RCLONE_AUTO_MODE}" =~ "copy" ]]; then
-    rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs="${FILEPATH}" srcRemote="${FILENAME}" dstFs="${DRIVENAME}":"${DRIVE_DIR}" dstRemote="${FILENAME}" _async=true
+    curl -s -S -u ${USER}:${PASSWORD} -H "Content-Type: application/json" -f -X POST -d '{"srcFs":"'"${FILEPATH}"'","srcRemote":"'"${FILENAME}"'","dstFs":"'"${REMOTE_PATH}"'","dstRemote":"'"${FILENAME}"'","_async":"true"}' ''${RCLONE_ADDR}'/operations/copyfile'
+    EXIT_CODE=$?
+    if [ ${EXIT_CODE} -eq 0 ]; then
+        echo "[INFO] Successfully send job to rclone: $1 -> ${REMOTE_PATH}"
+    else
+        echo "[ERROR] Failed to send job to rclone: $1"
+    fi
 fi
