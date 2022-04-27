@@ -1,16 +1,18 @@
-## Acknowledgments
-- [alexta69/metube](https://github.com/alexta69/metube)  Simple and easy-to-use yt-dlp frontend.
-- [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  Rely on the Aria2 script from P3TERX to automatically trigger the Rclone upload after the Aria2 downloads completed.
-- [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  Inspiration for this project.
-- [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  A very simple static homepage for your server.
+## 鸣谢
+- [alexta69/metube](https://github.com/alexta69/metube) 简洁好用的yt-dlp前端。
+- [P3TERX/aria2.conf](https://github.com/P3TERX/aria2.conf)  依靠来自P3TERX的Aria2脚本，实现了Aria2下载完成自动触发Rclone上传。
+- [wahyd4/aria2-ariang-docker](https://github.com/wahyd4/aria2-ariang-docker)  启发了本项目的总体思路。
+- [bastienwirtz/homer](https://github.com/bastienwirtz/homer)  使用yaml配置文件的静态导航页，便于自定义。
 - [mayswind/AriaNg](https://github.com/mayswind/AriaNg) | [filebrowser/filebrowser](https://github.com/filebrowser/filebrowser) | [aria2/aria2](https://github.com/aria2/aria2) | [rclone/rclone](https://github.com/rclone/rclone) | [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp)
-## Attention
- 1. **Do not abuse heroku's service, or your account could get banned.**
- 2. Aria2 download speed is limited to 5MB/s on default.
+## 注意
+ 1. **请勿滥用，重度使用可能导致账号被封。**
+ 2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合长期BT下载和共享文件用途。
+ 3. Aria2配置文件默认限速5MB/s。
+ 4. 免费Heroku dyno半小时无Web访问会休眠，可以使用[hetrixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
 
-[Overview](#Overview) 
+[概述](#概述) 
 
-[Deployment](#Deployment) 
+[部署方式](#部署方式) 
 
 [变量设置](#变量设置)  
 
@@ -18,28 +20,29 @@
 
 [更多用法和注意事项](#更多用法和注意事项)  
 
-## <a id="Overview"></a>Overview
-This project integrates metube yt-dlp web frontend, Aria2 + WebUI, Rclone + WebUI with auto-upload function, customizable portal page, Filebrowser, ttyd web terminal, Xray Vmess proxy protocol.
+## 概述
+本项目集成了Metube yt-dlp Web前端、Aria2+Rclone+WebUI、Aria2+Rclone联动自动上传功能、Rclone远程存储文件列表、可自定义的导航页、Filebrowser轻量网盘、ttyd Web终端、Xray Vmess协议。
 
 ![image](https://user-images.githubusercontent.com/98247050/165098261-7290ff50-ec0f-47ac-b8ec-7fe09f468a0e.png)
 
- 1. Rclone auto-upload function only needs to prepare rclone.conf file, and all other configurations are set to go.
- 2. Rclone have multiple auto-upload modes, copy, move, and uploading while seeding.
- 3. YT-dlp Web front-end metube also supports Rclone auto-upload after downloading.
- 4. Rclone runs on daemon mode, easy to manually transfer files on the WebUI and monitor transfers in real time.
- 5. You can connect Aria2 and Rclone from frontends such as AriaNg/RcloneNg running on other hosts.
- 6. Auto-backup configuration files and task list to Rclone remote, and try to restore from Rclone remote when dyno restarts.
- 7. ttyd web terminal, which can execute yt-dlp and other commands on the command line.
- 8. There are independent logs for each service in the log directory.
+ 1. 联动上传功能只需要准备rclone.conf配置文件, 其他一切配置都预备齐全。
+ 2. Aria2和Rclone多种联动模式，复制、移动、边做种边上传。
+ 3. yt-dlp Web前端metube下载后同样支持rclone联动。
+ 4. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
+ 5. Aria2和Rclone可以接入其它host上运行的AriaNg/RcloneNg等前端面板，方便多host集中管理控制。
+ 6. 自动备份相关配置文件到Rclone远程存储，dyno重启时尝试从远程恢复，实现了配置文件和下载任务列表的持久化。
+ 7. ttyd网页终端，可命令行执行yt-dlp下载工具和其它命令。
+ 8. log目录下有每个进程独立日志。
+## 部署方式
 
-## <a id="Deployment"></a>Deployment
-
- **Do not deploy directly this repository**  
+ **请勿使用本仓库直接部署**  
  
- 1. Fork this this repository.
- 2. Click Setting on fork repository page and check Template repository.
- 4. Click new button: Use this template，create a new repository。
- 5. For example, your Github username is bobby, and the new repository name is green. After logging in to heroku, visit https://dashboard.heroku.com/new?template=https://github.com/bobby/green to deploy.
+  **Heroku修复安全漏洞中，目前无法通过网页从私有库部署**  
+ 
+ 1. 点击右上角Fork，再点击Creat Fork。
+ 2. 在Fork出来的仓库页面上点击Setting，勾选Template repository。
+ 3. 然后点击Code返回之前的页面，点Setting下面新出现的按钮Use this template，起个随机名字创建新库。
+ 4. 比如你的Github用户名是bobby，新库名称是green。浏览器登陆heroku后，访问https://dashboard.heroku.com/new?template=https://github.com/bobby/green 即可部署。
  
 ### 变量设置
 对部署时可设定的变量做如下说明。
