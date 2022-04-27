@@ -60,7 +60,7 @@
 | `HEROKU_APP_NAME` | `` | Heroku APP名称。 |
 | `HEROKU_KEEP_AWAKE` | `` | 设置为"true"可以阻止dyno空闲时休眠，需要HEROKU_APP_NAME变量配合。 |
 | `HEROKU_RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，可选项，在指定的时间正在运行的dyno会重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
-| `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}]}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
+| `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}],"noprogress":true}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
 | `YTDL_OUTPUT_TEMPLATE` | `%(title)s_%(uploader)s.%(ext)s` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
 | `VMESS_UUID` | `a3ac20a7-45fe-4656-97ee-937ffec46144` | Vmess协议UUID，务必修改，建议使用UUID工具生成 |
 | `VMESS_PATH` | `/f495ba1f` | Vmess协议路径，不要包含敏感信息 |

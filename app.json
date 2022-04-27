@@ -67,7 +67,7 @@
         "YTDL_OPTIONS": {
             "description": "metube yt-dlp options.For more information: https://github.com/alexta69/metube#configuration-via-environment-variables",
             "required": false,
-            "value": "{\"postprocessors\":[{\"key\":\"Exec\",\"exec_cmd\":\"ytdlptorclone.sh\"}]}"
+            "value": "{\"postprocessors\":[{\"key\":\"Exec\",\"exec_cmd\":\"ytdlptorclone.sh\"}],\"noprogress\":true}"
         },
         "YTDL_OUTPUT_TEMPLATE": {
             "description": "metube yt-dlp output template. For more information: https://github.com/yt-dlp/yt-dlp#output-template",
