@@ -4,11 +4,11 @@
     "keywords": ["Deploy"],
     "env": {
         "GLOBAL_USER": {
-            "description": "Username",
+            "description": "Username for all web services",
             "value": "admin"
         },        
         "GLOBAL_PASSWORD": {
-            "description": "Password, double as Aria2 RPC token. Recommend strong password.",
+            "description": "Password for all wev services, double as Aria2 RPC token. Recommend strong password.",
             "value": "password"
         },
         "GLOBAL_LANGUAGE": {
@@ -52,7 +52,7 @@
             "value": ""
         },
         "HEROKU_RESTART_TIME": {
-            "description": "Optional. It's used with HEROKU_API_KEY for refreshing rclone token from within dyno. Dyno will restart at value time.",
+            "description": "Optional. It's used with HEROKU_API_KEY for refreshing rclone token from within dyno. Dyno will restart at value time. Format: 6:00, 24-hour clock.",
             "required": false,
             "value": ""
         },
