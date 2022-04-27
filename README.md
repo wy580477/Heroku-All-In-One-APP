@@ -30,11 +30,9 @@
  3. yt-dlp Web前端metube下载后同样支持rclone联动。
  4. Rclone以daemon方式运行，可在WebUI上手动传输文件和实时监测传输情况。
  5. Aria2和Rclone可以接入其它host上运行的AriaNg/RcloneNg等前端面板，方便多host集中管理控制。
- 6. 每天自动更新Rclone配置文件变量，解决了token过期问题。
- 7. 可指定每天dyno重启时间。
- 8. 自动备份相关配置文件到Rclone远程存储，dyno重启时尝试从远程恢复，实现了配置文件和下载任务列表的持久化。
- 9. ttyd网页终端，可命令行执行yt-dlp下载工具和其它命令。
- 10. log目录下有每个进程独立日志。
+ 6. 自动备份相关配置文件到Rclone远程存储，dyno重启时尝试从远程恢复，实现了配置文件和下载任务列表的持久化。
+ 7. ttyd网页终端，可命令行执行yt-dlp下载工具和其它命令。
+ 8. log目录下有每个进程独立日志。
 ## 部署方式
 
  **请勿使用本仓库直接部署**  
@@ -50,22 +48,24 @@
 对部署时可设定的变量做如下说明。
 | 变量 | 默认值 | 说明 |
 | :--- | :--- | :--- |
-| `USER` | `admin` | 用户名，适用于所有需要输入用户名的页面 |
-| `PASSWORD` | `password` | 务必修改为强密码，同样适用于所有需要输入密码的页面 |
-| `LANGUAGE` | `en` | 设置导航页和Filebrowser界面语言，chs为中文 |
-| `PORTAL_PATH` | `/portal` | 导航页路径和所有Web服务的基础URL，相当于密码之外多一层保护。不能为“/"和空值，结尾不能加“/" |
-| `DRIVE_NAME` | `auto` | Rclone远程存储配置名称，默认值auto将从配置文件第一行中提取 |
+| `GLOBAL_USER` | `admin` | 用户名，适用于所有需要输入用户名的页面 |
+| `GLOBAL_PASSWORD` | `password` | 务必修改为强密码，同样适用于所有需要输入密码的页面，同时也是Aria2 RPC密钥。 |
+| `GLOBAL_LANGUAGE` | `en` | 设置导航页和Filebrowser界面语言，chs为中文 |
+| `GLOBAL_PORTAL_PATH` | `/portal` | 导航页路径和所有Web服务的基础URL，相当于密码之外多一层保护。不能为“/"和空值，结尾不能加“/" |
 | `RCLONE_CONFIG_BASE64` | `` | Rclone配置文件Base64编码，可使用linux系统base64命令或者在线base64工具生成 |
+| `RCLONE_DRIVE_NAME` | `auto` | Rclone远程存储配置名称，后面不要加冒号。默认值auto将从配置文件第一行中提取 |
+| `RCLONE_AUTO_MODE` | `move_remote` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |
+| `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
+| `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量，解决onedrive三个月后token过期问题。需要HEROKU_APP_NAME和HEROKU_RESTART_TIME变量配合，而且dyno在指定的HEROKU_RESTART_TIME必须正在运行。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
+| `HEROKU_APP_NAME` | `` | Heroku APP名称。 |
+| `HEROKU_KEEP_AWAKE` | `` | 设置为"true"可以阻止dyno空闲时休眠，需要HEROKU_APP_NAME变量配合。 |
+| `HEROKU_RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，可选项，在指定的时间正在运行的dyno会重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
+| `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}],"noprogress":true}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
+| `YTDL_OUTPUT_TEMPLATE` | `%(title)s_%(uploader)s.%(ext)s` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
 | `VMESS_UUID` | `a3ac20a7-45fe-4656-97ee-937ffec46144` | Vmess协议UUID，务必修改，建议使用UUID工具生成 |
 | `VMESS_PATH` | `/f495ba1f` | Vmess协议路径，不要包含敏感信息 |
-| `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
-| `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
-| `HEROKU_APP_NAME` | `` | Heroku APP名称。 |
-| `RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，用于配合上面两个变量，dyno也同时重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
-| `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}]}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
-| `OUTPUT_TEMPLATE` | `%(title)s_%(uploader)s_%(id)s.%(ext)s` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
-| `POST_MODE` | `move_remote` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |  
 
+ RCLONE_AUTO_MODE:  
  1. dummy模式为无操作，move模式为Aria2下载及做种完成后移动到本地finished目录。
  2. move_remote模式为Aria2下载及做种完成后先移动到本地data数据卷下finished目录，然后移动到rclone远程存储。
  3. move_remote_only模式为Aria2下载及做种完成后移动到rclone远程存储。
@@ -81,21 +81,19 @@
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
  3. yt-dlp下载工具可以通过ttyd在网页终端执行，使用方法详细见：https://github.com/yt-dlp/yt-dlp#usage-and-options  
     内置快捷指令：  
-    dlpr：使用yt-dlp下载视频到videos文件夹下，下载完成后可发送任务到rclone，受POST_MODE变量控制。  
+    dlpr：使用yt-dlp下载视频到videos文件夹下，下载完成后发送任务到rclone，受POST_MODE变量控制。  
 ### 更多用法和注意事项
  1. Heroku每24小时重启后恢复到部署时文件系统，尽管config文件夹下配置文件会自动备份和尝试恢复，除了变量外任何改动都建议在部署前在github仓库内修改。
  2. 修改Heroku app变量方法：在Heroku app页面上点击setting，再点击Reveal Config Vars即可修改。
- 3. 自动更新rclone配置文件token，需要指定HEROKU_API_KEY、HEROKU_APP_NAME、RESTART_TIME三个变量，而且dyno在指定的RESTART_TIME时间必须正在运行。
- 4. RESTART_TIME变量指定dyno重启时间，需要HEROKU_API_KEY和HEROKU_APP_NAME变量配合才能工作。
- 5. Rclone配置文件末尾加上如下内容，可以在Rclone Web前端中挂载本地存储，方便手动上传。
+ 3. Rclone配置文件末尾加上如下内容，可以在Rclone Web前端中挂载本地存储，方便手动上传。
 ```
 [local]
 type = alias
 remote = /mnt/data
 ```
- 6. 无法通过Rclone Web前端建立需要网页认证的存储配置。
- 7. 个别标题有特殊字符的视频metube下载后rclone可能无法上传，需要在YTDL_OPTIONS变量中添加："restrictfilenames":true
- 8. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件，可以设置aria2清理文件方式和Rclone上传目录。
- 9. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
- 10. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
- 11. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。Heroku国内直连很难，需要使用Cloudflare或其它方式中转。
+ 4. 无法通过Rclone Web前端建立需要网页认证的存储配置。
+ 5. 个别标题有特殊字符的视频metube下载后rclone可能无法上传，需要在YTDL_OPTIONS变量中添加："restrictfilenames":true
+ 6. content/aria2目录下，aria2_chs(en).conf为Aria2配置文件，按需要指定的语言环境变量选择版本修改。script.conf为Aria2自动化配置文件，可以设置aria2清理文件方式和Rclone上传目录。
+ 7. 每次dyno启动自动更新BT tracker list，如果需要禁用，重命名或删除/content/aria2/tracker.sh文件。
+ 8. content/homer_conf目录下是导航页设置文件homer_chs(en).yml和图标资源，新加入的图标，在设置文件中要以./assets/tools/example.png这样的路径调用。
+ 9. Vmess协议AlterID为0，可用Vmess WS 80端口或者Vmess WS tls 443端口连接。Xray设置可以通过content/service/xray/run文件修改。Heroku国内直连很难，需要使用Cloudflare或其它方式中转。
