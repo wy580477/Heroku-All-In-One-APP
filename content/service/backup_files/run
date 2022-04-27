@@ -5,8 +5,8 @@ DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 
 exec 2>&1
 
-if [ "HEROKU_KEEP_AWAKE" = "true" ]; then
-    curl https://${HEROKU_APP_NAME}.herokuapp.com
+if [ "${HEROKU_KEEP_AWAKE}" = "true" ]; then
+    curl https://${HEROKU_APP_NAME}.herokuapp.com/${RANDOM}
 fi
 
 rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=aria2.session dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=aria2.session _async=true
