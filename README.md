@@ -46,24 +46,24 @@
  
 ### 变量设置
 对部署时可设定的变量做如下说明。
-| 变量 | 默认值 | 说明 |
-| :--- | :--- | :--- |
-| `GLOBAL_USER` | `admin` | 用户名，适用于所有需要输入用户名的页面 |
-| `GLOBAL_PASSWORD` | `password` | 务必修改为强密码，同样适用于所有需要输入密码的页面，同时也是Aria2 RPC密钥。 |
-| `GLOBAL_LANGUAGE` | `en` | 设置导航页和Filebrowser界面语言，chs为中文 |
-| `GLOBAL_PORTAL_PATH` | `/portal` | 导航页路径和所有Web服务的基础URL，相当于密码之外多一层保护。不能为“/"和空值，结尾不能加“/" |
-| `RCLONE_CONFIG_BASE64` | `` | Rclone配置文件Base64编码，可使用linux系统base64命令或者在线base64工具生成 |
-| `RCLONE_DRIVE_NAME` | `auto` | Rclone远程存储配置名称，后面不要加冒号。默认值auto将从配置文件第一行中提取 |
-| `RCLONE_AUTO_MODE` | `move_remote` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |
-| `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
-| `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量，解决onedrive三个月后token过期问题。需要HEROKU_APP_NAME和HEROKU_RESTART_TIME变量配合，而且dyno在指定的HEROKU_RESTART_TIME必须正在运行。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
-| `HEROKU_APP_NAME` | `` | Heroku APP名称。 |
-| `HEROKU_KEEP_AWAKE` | `` | 设置为"true"可以阻止dyno空闲时休眠，需要HEROKU_APP_NAME变量配合。 |
-| `HEROKU_RESTART_TIME` | `` | 指定更新Rclone配置文件的时间，可选项，在指定的时间正在运行的dyno会重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
-| `YTDL_OPTIONS` | `{"postprocessors":[{"key":"Exec","exec_cmd":"ytdlptorclone.sh"}],"noprogress":true}` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
-| `YTDL_OUTPUT_TEMPLATE` | `%(title)s_%(uploader)s.%(ext)s` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
-| `VMESS_UUID` | `a3ac20a7-45fe-4656-97ee-937ffec46144` | Vmess协议UUID，务必修改，建议使用UUID工具生成 |
-| `VMESS_PATH` | `/f495ba1f` | Vmess协议路径，不要包含敏感信息 |
+| 变量| 说明 |
+| :--- | :--- |
+| `GLOBAL_USER` | 用户名，适用于所有需要输入用户名的页面 |
+| `GLOBAL_PASSWORD` | 务必修改为强密码，同样适用于所有需要输入密码的页面，同时也是Aria2 RPC密钥。 |
+| `GLOBAL_LANGUAGE` | 设置导航页和Filebrowser界面语言，chs为中文 |
+| `GLOBAL_PORTAL_PATH` | 导航页路径和所有Web服务的基础URL，相当于密码之外多一层保护。不能为“/"和空值，结尾不能加“/" |
+| `RCLONE_CONFIG_BASE64` | Rclone配置文件Base64编码，可使用linux系统base64命令或者在线base64工具生成 |
+| `RCLONE_DRIVE_NAME` | Rclone远程存储配置名称，后面不要加冒号。默认值auto将从配置文件第一行中提取 |
+| `RCLONE_AUTO_MODE` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |
+| `TZ` | 时区，Asia/Shanghai为中国时区 |
+| `HEROKU_API_KEY` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量，解决onedrive三个月后token过期问题。需要HEROKU_APP_NAME和HEROKU_RESTART_TIME变量配合，而且dyno在指定的HEROKU_RESTART_TIME必须正在运行。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
+| `HEROKU_APP_NAME` | Heroku APP名称。 |
+| `HEROKU_KEEP_AWAKE` | 设置为"true"可以阻止dyno空闲时休眠，需要HEROKU_APP_NAME变量配合。 |
+| `HEROKU_RESTART_TIME` | 指定更新Rclone配置文件的时间，可选项，在指定的时间正在运行的dyno会重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
+| `YTDL_OPTIONS` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
+| `YTDL_OUTPUT_TEMPLATE` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
+| `VMESS_UUID` | Vmess协议UUID，务必修改，建议使用UUID工具生成 |
+| `VMESS_PATH` | Vmess协议路径，不要包含敏感信息 |
 
  RCLONE_AUTO_MODE:  
  1. dummy模式为无操作，move模式为Aria2下载及做种完成后移动到本地finished目录。
