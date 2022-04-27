@@ -3,7 +3,7 @@
 sleep 60
 
 DATE=$(date +%H%M | sed 's/^0//g')
-while [ "${DATE}" != "${HEROKU_RESTART_TIME/:/}" ]; do
+while [[ "${DATE}" != "${HEROKU_RESTART_TIME/:/}" ]]; do
   sleep 1
 done
 
