@@ -28,7 +28,7 @@
             "value": "auto"
         },
         "RCLONE_CONFIG_BASE64": {
-            "description": "Base64 encoded Rclone config file",
+            "description": "Base64 encoded Rclone config file. You can use base64 command in linux OS or online base64 tools to encode rclone config file.",
             "required": false,
             "value": ""
         },
