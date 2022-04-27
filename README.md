@@ -53,7 +53,7 @@
 | `GLOBAL_LANGUAGE` | `en` | 设置导航页和Filebrowser界面语言，chs为中文 |
 | `GLOBAL_PORTAL_PATH` | `/portal` | 导航页路径和所有Web服务的基础URL，相当于密码之外多一层保护。不能为“/"和空值，结尾不能加“/" |
 | `RCLONE_CONFIG_BASE64` | `` | Rclone配置文件Base64编码，可使用linux系统base64命令或者在线base64工具生成 |
-| `RCLONE_DRIVE_NAME` | `auto` | Rclone远程存储配置名称，默认值auto将从配置文件第一行中提取 |
+| `RCLONE_DRIVE_NAME` | `auto` | Rclone远程存储配置名称，后面不要加冒号。默认值auto将从配置文件第一行中提取 |
 | `RCLONE_AUTO_MODE` | `move_remote` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |
 | `TZ` | `UTC` | 时区，Asia/Shanghai为中国时区 |
 | `HEROKU_API_KEY` | `` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量，解决onedrive三个月后token过期问题。需要HEROKU_APP_NAME和HEROKU_RESTART_TIME变量配合，而且dyno在指定的HEROKU_RESTART_TIME必须正在运行。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
