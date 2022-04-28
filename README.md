@@ -83,7 +83,7 @@
    ![image](https://user-images.githubusercontent.com/98247050/163184113-d0f09e78-01f9-4d4a-87b9-f4a9c1218253.png)
  3. yt-dlp下载工具可以通过ttyd在网页终端执行，使用方法详细见：https://github.com/yt-dlp/yt-dlp#usage-and-options  
     内置快捷指令：  
-    dlpr：使用yt-dlp下载视频到videos文件夹下，下载完成后发送任务到rclone，受POST_MODE变量控制。  
+    dlpr：使用yt-dlp下载视频到videos文件夹下，下载完成后发送任务到rclone，受RCLONE_AUTO_MODE变量控制。  
 ### 更多用法和注意事项
  1. 如果网页访问APP出现故障，按下shift+F5强制刷新，如果还不行，从浏览器中清除app对应的heroku域名缓存和cookie。
  2. Heroku每24小时重启后恢复到部署时文件系统，尽管config文件夹下配置文件会自动备份和尝试恢复，除了变量外任何改动都建议在部署前在github仓库内修改。
