@@ -68,7 +68,7 @@ type = alias
 remote = /mnt/data
 ```
  4. It is not possible to configure a Rclone remote which requires web authentication through Rclone web UI in this app.
- 5. Rclone may fail to upload some videos with special characters in title，added following in the YTDL_OPTIONS env: "restrictfilenames":true
+ 5. Rclone may fail to upload some videos with special characters in title, add following in the YTDL_OPTIONS env: "restrictfilenames":true
  6. Under content/aria2 directory in repository, aria2_en.conf is Aria2 config file, script.conf is Aria2 Event Hook config file which controls Aria2 auto-cleanup settings and Rclone auto-upload directory.
  7. BT tracker list is auto-updated each time dyno restarted, rename or delete /content/aria2/tracker.sh file to disable this function.
  8. Portal page config file homer_en.yml and icon resources are under content/homer_conf directory in repository, use path as ./assets/tools/example.png to add the new icon to homer config file.
