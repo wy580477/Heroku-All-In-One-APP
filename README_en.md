@@ -72,7 +72,7 @@ remote = /mnt/data
  6. Under content/aria2 directory in repository, aria2_en.conf is Aria2 config file, script.conf is Aria2 Event Hook config file which controls Aria2 auto-cleanup settings and Rclone auto-upload directory.
  7. BT tracker list is auto-updated each time dyno restarted, rename or delete /content/aria2/tracker.sh file to disable this function.
  8. Portal page config file homer_en.yml and icon resources are under content/homer_conf directory in repository, use path as ./assets/tools/example.png to add the new icon to homer config file.
- 9. Vmess protocol proxy protocol: AlterID is 0, you can connect to either Vmess WS port 80 or Vmess WS tls port 443. Xray settings can be modified via content/service/xray/run file in repository. Heroku is difficult to connect in Mainland China.     
+ 9. Vmess proxy protocol: AlterID is 0, you can connect to either Vmess WS port 80 or Vmess WS tls port 443. Xray settings can be modified via content/service/xray/run file in repository. Heroku is difficult to connect in Mainland China.     
    Example client setting:   
    ![image](https://user-images.githubusercontent.com/98247050/165655041-9fe1bada-be23-48f1-bcb3-57288e998035.png)    
    With tls:   
