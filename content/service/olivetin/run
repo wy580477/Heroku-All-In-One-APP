@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Dummy run for building image
+if [ "${MODE}" = "build" ]; then
+    sleep infinity
+fi
+
+DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
+rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/olivetin_config.yaml /.aria2allinoneworkdir/config.yaml 2>/dev/null
+
+if [ ! -f "/.aria2allinoneworkdir/config.yaml" ]; then
+    mv /.aria2allinoneworkdir/olivetin_config.yaml  /.aria2allinoneworkdir/config.yaml
+fi
+
+OliveTin --configdir /.aria2allinoneworkdir

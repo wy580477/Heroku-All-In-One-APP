@@ -24,6 +24,15 @@ handle {$GLOBAL_PORTAL_PATH}/ttyd* {
         }     
         reverse_proxy * localhost:7681
 }
+# Configure OliveTin
+handle {$GLOBAL_PORTAL_PATH}/olivetin* {
+        redir {$GLOBAL_PORTAL_PATH}/olivetin {$GLOBAL_PORTAL_PATH}/olivetin/
+        uri strip_prefix {$GLOBAL_PORTAL_PATH}/olivetin       
+        basicauth {              
+                {$GLOBAL_USER} HASH
+        }     
+        reverse_proxy * localhost:1337
+}
 # Configure AriaNg
 handle {$GLOBAL_PORTAL_PATH}/ariang* {
         redir {$GLOBAL_PORTAL_PATH}/ariang {$GLOBAL_PORTAL_PATH}/ariang/         

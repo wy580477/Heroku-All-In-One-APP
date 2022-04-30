@@ -15,6 +15,7 @@ RUN apk add --no-cache curl caddy jq bash findutils runit aria2 rclone apache2-u
     && apk del .build-deps \
     && chmod +x /.aria2allinoneworkdir/service/*/run /.aria2allinoneworkdir/service/*/log/run /.aria2allinoneworkdir/aria2/*.sh /.aria2allinoneworkdir/*.sh \
     && mv /.aria2allinoneworkdir/ytdlptorclone.sh /usr/bin/ \
+    && /.aria2allinoneworkdir/install_olivetin.sh \
     && ln -s /.aria2allinoneworkdir/service/* /etc/service/
 
 ENTRYPOINT ["sh","/.aria2allinoneworkdir/entrypoint.sh"]
