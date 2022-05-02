@@ -7,6 +7,7 @@
 ## Attention
  1. **Do not abuse heroku's service, or your account could get banned.**
  2. Aria2 download speed is limited to 5MB/s on default.
+ 3. Anyone who can login into this app has full access to data in this app and Rclone remotes. Do not share with other ppl, and do not store sensitive information with this app.
 
 [Overview](#Overview) 
 
@@ -24,7 +25,7 @@ This project integrates metube yt-dlp web frontend, Aria2 + WebUI, Rclone + WebU
  1. Rclone auto-upload function only needs to prepare rclone.conf file, and all other configurations are set to go.
  2. Rclone have multiple auto-upload modes, copy, move, and uploading while seeding.
  3. YT-dlp Web front-end metube also supports Rclone auto-upload after downloading.
- 4. Rclone runs on daemon mode, easy to manually transfer files on the WebUI and monitor transfers in real time.
+ 4. Rclone runs on daemon mode, easy to manually transfer files and monitor transfers in real time on WebUI.
  5. You can connect Aria2 and Rclone from frontends such as AriaNg/RcloneNg running on other hosts.
  6. Auto-backup configuration files and task list to Rclone remote, and try to restore from Rclone remote when dyno restarts.
  7. ttyd web terminal, which can execute yt-dlp and other commands on the command line.
@@ -40,13 +41,13 @@ This project integrates metube yt-dlp web frontend, Aria2 + WebUI, Rclone + WebU
  4. For example, your Github username is bobby, and the new repository name is green. After logging in to heroku, visit https://dashboard.heroku.com/new?template=https://github.com/bobby/green to deploy.
  5. Detailed explanation of RCLONE_AUTO_MODE env:   
     dummy: Do nothing，move: Move files to local finished folder after Aria2 download & seeding completed.  
-    move_remote: Move files to local finished folder after Aria2 download & seeding completed，then move to Rclone remote storage。  
+    move_remote: Move files to local finished folder after Aria2 download & seeding completed，then move to Rclone remote storage.  
     move_remote_only: Move files to Rclone remote storage after Aria2 download & seeding completed.  
     copy_remote_first: Copy files to Rclone remote storage after Aria2 download completed, triggered before seeding for bittorrent tasks.  
     copy_remote: Copy files to Rclone remote storage after Aria2 download & seeding completed.  
     custom: set Aria2 Event Hook options in aria2 configure file by yourself.     
-    Under two move modes, videos downloaded by mutube and dlpr command will be moved to Rclone remote storage.  
-    Under two copy modes, videos downloaded by mutube and dlpr command will be copied to Rclone remote storage.  
+    Under move_remote & move_remote_only modes, videos downloaded by mutube and dlpr command will be moved to Rclone remote storage.  
+    Under copy_remote & copy_remote_first modes, videos downloaded by mutube and dlpr command will be copied to Rclone remote storage.  
  
 ## <a id="first"></a>First run
  1. After deployment, for example, your heroku domain name is bobby.herokuapp.com, the portal page path is /portal, then visit bobby.herokuapp.com/portal to reach the portal page.

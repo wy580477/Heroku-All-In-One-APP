@@ -6,7 +6,6 @@ if [ "${MODE}" = "build" ]; then
 fi
 
 # Configure & run metube
-python3 -m pip install -U yt-dlp &
 DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/queue /.aria2allinoneworkdir/.metube/ 2>/dev/null
 OUTPUT_TEMPLATE=${YTDL_OUTPUT_TEMPLATE}

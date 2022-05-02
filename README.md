@@ -10,7 +10,8 @@
  1. **请勿滥用，重度使用可能导致账号被封。**
  2. Heroku的文件系统是临时性的，每24小时强制重启一次后会恢复到部署时状态。不适合长期BT下载和共享文件用途。
  3. Aria2配置文件默认限速5MB/s。
- 4. 免费Heroku dyno半小时无Web访问会休眠，可以使用[hetrixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
+ 4. 所有可以登陆此APP的用户可以访问/修改此APP以及Rclone远程存储的所有数据，不要存放敏感数据，不要与他人共享使用。
+ 5. 免费Heroku dyno半小时无Web访问会休眠，可以使用[hetrixtools](https://hetrixtools.com/uptime-monitor/215727.html)这样的免费VPS/网站监测服务定时http ping，保持持续运行。
 
 [概述](#概述) 
 
@@ -34,7 +35,7 @@
  5. Aria2和Rclone可以接入其它host上运行的AriaNg/RcloneNg等前端面板，方便多host集中管理控制。
  6. 自动备份相关配置文件到Rclone远程存储，dyno重启时尝试从远程恢复，实现了配置文件和下载任务列表的持久化。
  7. ttyd网页终端，可命令行执行yt-dlp下载工具和其它命令。
- 8. log目录下有每个进程独立日志。
+ 8. log目录下有每个服务独立日志。
 ## 部署方式
 
  **请勿使用本仓库直接部署**  
@@ -58,10 +59,10 @@
 | `RCLONE_DRIVE_NAME` | Rclone远程存储配置名称，后面不要加冒号。默认值auto将从配置文件第一行中提取 |
 | `RCLONE_AUTO_MODE` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |
 | `TZ` | 时区，Asia/Shanghai为中国时区 |
-| `HEROKU_API_KEY` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量，解决onedrive三个月后token过期问题。需要HEROKU_APP_NAME和HEROKU_RESTART_TIME变量配合，而且dyno在指定的HEROKU_RESTART_TIME必须正在运行。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
+| `HEROKU_API_KEY` | Heroku账号API密钥，可选项，用于从dyno内部更新rclone配置文件变量，解决rclone token过期问题。需要HEROKU_APP_NAME和HEROKU_RESTART_TIME变量配合，而且dyno在指定的HEROKU_RESTART_TIME必须正在运行。可从Heroku账号面板处获得，也可以用heroku cli命令heroku authorizations:create创建。 |
 | `HEROKU_APP_NAME` | Heroku APP名称。 |
 | `HEROKU_KEEP_AWAKE` | 设置为"true"可以阻止dyno空闲时休眠，需要HEROKU_APP_NAME变量配合。 |
-| `HEROKU_RESTART_TIME` | 指定更新Rclone配置文件的时间，可选项，在指定的时间正在运行的dyno会重启。格式为6:00，24小时制，前面不要加0，时区为TZ变量所指定的时区。 |
+| `HEROKU_RESTART_TIME` | 指定更新Rclone配置文件的时间，可选项，在指定的时间正在运行的dyno会重启。格式为6:00，24小时制，时区为TZ变量所指定的时区。 |
 | `YTDL_OPTIONS` | metube下载所使用的yt-dlp参数，默认值与rclone联动。更多参数详见[metube#configuration](https://github.com/alexta69/metube#configuration-via-environment-variables) |
 | `YTDL_OUTPUT_TEMPLATE` | Metube下载输出文件名格式，详见[yt-dlp#output-template](https://github.com/yt-dlp/yt-dlp#output-template) |
 | `VMESS_UUID` | Vmess协议UUID，务必修改，建议使用UUID工具生成 |
@@ -75,7 +76,7 @@
  5. copy_remote模式为Aria2下载及做种完成后先移动到本地finished目录，然后复制到rclone远程存储。
  6. custom模式为自行设置Aria2配置文件触发脚本选项。   
  
- 两种move模式下mutube以及dlpr指令下载完成后会移动文件至rclone远程存储，两种copy模式下则为复制。  
+ move_remote和move_remote_only模式下mutube以及dlpr指令下载完成后会移动文件至rclone远程存储，copy_remote和copy_remote_first模式下则为复制。  
  
 ### 初次使用
  1. 部署完成后，比如你的heroku域名是bobby.herokuapp.com，导航页路径是/portal，访问bobby.herokuapp.com/portal 即可到达导航页。 

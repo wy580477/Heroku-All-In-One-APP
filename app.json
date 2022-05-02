@@ -8,7 +8,7 @@
             "value": "admin"
         },        
         "GLOBAL_PASSWORD": {
-            "description": "Password for all wev services, double as Aria2 RPC token. Recommend strong password.",
+            "description": "Password for all web services, double as Aria2 RPC token. Recommend strong password.",
             "value": "password"
         },
         "GLOBAL_LANGUAGE": {
@@ -20,7 +20,7 @@
             "value": "/portal"
         },
         "RCLONE_AUTO_MODE": {
-            "description": "Aria2 Event Hook mode, this also controls file operation after metube downloads completed",
+            "description": "Aria2 Event Hook mode, this also controls file operation after metube downloads completed.See detailed explanation in README.",
             "value": "move_remote"
         },
         "RCLONE_DRIVE_NAME": {
@@ -47,12 +47,12 @@
             "value": ""
         },
         "HEROKU_API_KEY": {
-            "description": "Your heroku api key. Optional. It's used with HEROKU_APP_NAME and HEROKU_RESTART_TIME for refreshing rclone token from within dyno to prevent onedrive token expiration after 90 days.",
+            "description": "Your heroku api key. Optional. It's used with HEROKU_APP_NAME and HEROKU_RESTART_TIME for refreshing Rclone token from within dyno to prevent token expiration.",
             "required": false,
             "value": ""
         },
         "HEROKU_RESTART_TIME": {
-            "description": "Optional. It's used with HEROKU_API_KEY for refreshing rclone token from within dyno. Dyno will restart at value time. Format: 6:00, 24-hour clock.",
+            "description": "Optional. It's used with HEROKU_API_KEY for refreshing rclone token from within dyno. Dyno needs to be running at value time and will be restarted. Format: 6:00, 24-hour clock.",
             "required": false,
             "value": ""
         },
@@ -65,14 +65,14 @@
             "value": "/f495ba1f"
         },
         "YTDL_OPTIONS": {
-            "description": "metube yt-dlp options. For more information: https://github.com/alexta69/metube#configuration-via-environment-variables",
+            "description": "metube yt-dlp options. Default value will send job to rclone according to RCLONE_AUTO_MODE after download completed. For more information: https://github.com/alexta69/metube#configuration-via-environment-variables",
             "required": false,
             "value": "{\"postprocessors\":[{\"key\":\"Exec\",\"exec_cmd\":\"ytdlptorclone.sh\"}],\"noprogress\":true}"
         },
         "YTDL_OUTPUT_TEMPLATE": {
             "description": "metube yt-dlp output template. For more information: https://github.com/yt-dlp/yt-dlp#output-template",
             "required": false,
-            "value": "%(title)s_%(uploader)s.%(ext)s"
+            "value": "%(webpage_url_domain)s_%(title)s_%(uploader)s.%(ext)s"
         }
     },
     "stack": "container"
