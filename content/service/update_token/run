@@ -1,19 +1,15 @@
 #!/bin/bash
 
-sleep 60
+sleep 55
 
 DATE=$(date +%H%M | sed 's/^0//g')
 RESTART_TIME=$(echo ${HEROKU_RESTART_TIME/:/} | sed 's/^0//g')
-while [[ "${DATE}" != "${RESTART_TIME}" ]]; do
-  sleep 1
-done
 
-DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
-rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/aria2/aria2.session "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
-rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/.metube/queue "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
-
-CONF=$(base64 /mnt/data/config/rclone.conf)
-if [ "${HEROKU_API_KEY}" != "" ]; then
+if [[ "${DATE}" = "${RESTART_TIME}" ]] && [[ "${HEROKU_API_KEY}" != "" ]]; then
+  DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
+  rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/aria2/aria2.session "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
+  rclone copy --config /mnt/data/config/rclone.conf /.aria2allinoneworkdir/.metube/queue "${DRIVENAME}":/"${HEROKU_APP_NAME}"/
+  CONF=$(base64 /mnt/data/config/rclone.conf)
   curl -n -X PATCH https://api.heroku.com/apps/"${HEROKU_APP_NAME}"/config-vars \
   -d '{"RCLONE_CONFIG_BASE64": "'"${CONF}"'"}' \
   -H "Content-Type: application/json" \
