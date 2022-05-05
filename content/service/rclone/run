@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# Dummy run for building image
-if [ "${MODE}" = "build" ]; then
-	sleep infinity
-fi
-
 # Run rclone
 htpasswd -csb /.aria2allinoneworkdir/htpasswd ${GLOBAL_USER} ${GLOBAL_PASSWORD}
 exec 2>&1

@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# Dummy run for building image
-if [ "${MODE}" = "build" ]; then
-	sleep infinity
-fi
-
 # Global variables
 DIR_RUNTIME="/usr/bin"
 DIR_TMP="$(mktemp -d)"

@@ -1,10 +1,5 @@
 #!/bin/sh
 
-# Dummy run for building image
-if [ "${MODE}" = "build" ]; then
-       sleep infinity
-fi
-
 # Configure aria2
 touch /.aria2allinoneworkdir/aria2/aria2.session
 DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
