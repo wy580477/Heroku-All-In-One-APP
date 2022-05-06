@@ -28,7 +28,7 @@
             "value": "auto"
         },
         "RCLONE_CONFIG_BASE64": {
-            "description": "Base64 encoded Rclone config file. You can use base64 command in linux OS or online base64 tools to encode rclone config file.",
+            "description": "Base64 encoded Rclone config file. You can use base64 command in linux OS or online base64 tools to encode rclone config file. Rclone config file with multiple remotes could exceed Heroku's 32kb limit for config vars.",
             "required": false,
             "value": ""
         },
