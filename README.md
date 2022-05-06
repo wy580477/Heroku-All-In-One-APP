@@ -55,7 +55,7 @@
 | `GLOBAL_PASSWORD` | 务必修改为强密码，同样适用于所有需要输入密码的页面，同时也是Aria2 RPC密钥。 |
 | `GLOBAL_LANGUAGE` | 设置导航页和Filebrowser界面语言，chs为中文 |
 | `GLOBAL_PORTAL_PATH` | 导航页路径和所有Web服务的基础URL，相当于密码之外多一层保护。不能为“/"和空值，结尾不能加“/" |
-| `RCLONE_CONFIG_BASE64` | Rclone配置文件Base64编码，可使用linux系统base64命令或者在线base64工具生成 |
+| `RCLONE_CONFIG_BASE64` | Rclone配置文件Base64编码，可使用linux系统base64命令或者在线base64工具生成。注意，多远程存储Rclone配置文件可能超过Heroku变量32kb的上限。 |
 | `RCLONE_DRIVE_NAME` | Rclone远程存储配置名称，后面不要加冒号。默认值auto将从配置文件第一行中提取 |
 | `RCLONE_AUTO_MODE` | 控制Aria2、metube和dlpr指令与Rclone联动模式，详细说明见下文 |
 | `TZ` | 时区，Asia/Shanghai为中国时区 |
