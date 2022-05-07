@@ -33,7 +33,7 @@ This project integrates metube yt-dlp web frontend, Aria2 + WebUI, Rclone + WebU
 
 ## <a id="Deployment"></a>Deployment
 
- **Do not deploy directly this repository**  
+ **Do not deploy directly from this repository**  
  
  1. Fork this this repository.
  2. Click Setting on fork repository page and check Template repository.
