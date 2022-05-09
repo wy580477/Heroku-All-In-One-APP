@@ -31,4 +31,4 @@ exec 2>&1
 exec aria2c --conf-path="/mnt/data/config/aria2.conf" \
 --enable-rpc \
 --rpc-secret=${GLOBAL_PASSWORD} \
---rpc-listen-port=56800
+--rpc-listen-port=61800

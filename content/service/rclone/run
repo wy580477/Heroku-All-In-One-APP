@@ -6,7 +6,7 @@ exec 2>&1
 exec rclone rcd --rc-serve \
 --rc-web-gui-no-open-browser \
 --rc-htpasswd=/.aria2allinoneworkdir/htpasswd \
---rc-addr=localhost:56802 \
+--rc-addr=localhost:61802 \
 --buffer-size 4M \
 --transfers 4 \
 --config /mnt/data/config/rclone.conf \

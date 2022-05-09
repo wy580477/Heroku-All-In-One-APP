@@ -9,7 +9,7 @@ if [ "${HEROKU_KEEP_AWAKE}" = "true" ]; then
     curl https://${HEROKU_APP_NAME}.herokuapp.com/${RANDOM}
 fi
 
-rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=aria2.session dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=aria2.session _async=true
-rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=dht.dat dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=dht.dat _async=true
-rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:56802 operations/copyfile srcFs=/.aria2allinoneworkdir/.metube srcRemote=queue dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=queue _async=true
+rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:61802 operations/copyfile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=aria2.session dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=aria2.session _async=true
+rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:61802 operations/copyfile srcFs=/.aria2allinoneworkdir/aria2 srcRemote=dht.dat dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=dht.dat _async=true
+rclone rc --user "${GLOBAL_USER}" --pass "${GLOBAL_PASSWORD}" --rc-addr=localhost:61802 operations/copyfile srcFs=/.aria2allinoneworkdir/.metube srcRemote=queue dstFs="${DRIVENAME}":/"${HEROKU_APP_NAME}" dstRemote=queue _async=true
 rclone copy --config /mnt/data/config/rclone.conf /mnt/data/config "${DRIVENAME}":/"${HEROKU_APP_NAME}"

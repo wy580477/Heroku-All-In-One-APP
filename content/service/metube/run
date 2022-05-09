@@ -4,6 +4,8 @@
 DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/queue /.aria2allinoneworkdir/.metube/ 2>/dev/null
 OUTPUT_TEMPLATE=${YTDL_OUTPUT_TEMPLATE}
+sv start caddy || exit 1
+sleep 10
 cd /app
 exec 2>&1
 exec python3 /app/app/main.py

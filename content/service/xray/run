@@ -12,7 +12,7 @@ dns:
   servers:
   - https+local://8.8.8.8/dns-query
 inbounds:
-- port: 56803
+- port: 61804
   listen: localhost
   protocol: vmess
   settings:

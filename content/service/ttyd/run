@@ -4,4 +4,4 @@ DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 rclone copy --config /mnt/data/config/rclone.conf "${DRIVENAME}":/"${HEROKU_APP_NAME}"/bashrc /mnt/data/config/bashrc 2>/dev/null
 
 exec 2>&1
-exec ttyd -i 127.0.0.1 -P 3 -t fontSize=17 -t titleFixed=Heroku_ttyd -t 'theme={"background": "black"}' bash --rcfile /mnt/data/config/bashrc
+exec ttyd -i 127.0.0.1 -p 61803 -P 3 -t fontSize=17 -t titleFixed=Heroku_ttyd -t 'theme={"background": "black"}' bash --rcfile /mnt/data/config/bashrc

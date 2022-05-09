@@ -21,4 +21,4 @@ fi
 
 # Run filebrowser
 exec 2>&1
-exec filebrowser -d /mnt/data/config/filebrowser.db -b ${GLOBAL_PORTAL_PATH}/files -p 56801
+exec filebrowser -d /mnt/data/config/filebrowser.db -b ${GLOBAL_PORTAL_PATH}/files -p 61801
