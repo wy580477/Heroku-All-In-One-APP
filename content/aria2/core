@@ -95,7 +95,7 @@ READ_ARIA2_CONF() {
         exit 1
     else
         ARIA2_DOWNLOAD_DIR=$(grep ^dir "${ARIA2_CONF}" | cut -d= -f2-)
-        RPC_PORT=56800
+        RPC_PORT=61800
         RPC_SECRET=$(grep ^rpc-secret "${ARIA2_CONF}" | cut -d= -f2-)
         SAVE_SESSION_INTERVAL=$(grep ^save-session-interval "${ARIA2_CONF}" | cut -d= -f2-)
         [[ ${ARIA2_DOWNLOAD_DIR} && ${RPC_PORT} && ${SAVE_SESSION_INTERVAL} ]] || {
