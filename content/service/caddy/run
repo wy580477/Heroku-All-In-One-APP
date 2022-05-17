@@ -2,7 +2,7 @@
 
 
 # Configure AriaNG & Rclone WebUI
-sed -i 's|rpcInterface:"jsonrpc"|rpcInterface:"'"${GLOBAL_PORTAL_PATH/\//}"'/jsonrpc"|g' /.aria2allinoneworkdir/ariang/js/aria-ng-f1dd57abb9.min.js
+sed -i 's|rpcInterface:"jsonrpc"|rpcInterface:"'"${GLOBAL_PORTAL_PATH/\//}"'/jsonrpc"|g' /.aria2allinoneworkdir/ariang/js/aria-ng-a87a79b0e7.min.js
 sed -i 's|ipAddress:a|ipAddress:`${window.location.protocol}//${window.location.hostname}'"${GLOBAL_PORTAL_PATH}"'/rclonerc`|g' /.aria2allinoneworkdir/rcloneweb/build/static/js/3.90421092.chunk.js
 
 # Configure homer
