@@ -3,10 +3,10 @@
 DRIVENAME="$(grep ^drive-name /mnt/data/config/script.conf | cut -d= -f2-)"
 
 # Run rclone
-htpasswd -csb /workdir/htpasswd_webdav ${GLOBAL_USER} ${GLOBAL_PASSWORD}
+htpasswd -csb /.aria2allinoneworkdir/htpasswd_webdav ${GLOBAL_USER} ${GLOBAL_PASSWORD}
 exec 2>&1
 exec rclone serve webdav ${DRIVENAME}:/ \
---htpasswd=/workdir/htpasswd_webdav \
+--htpasswd=/.aria2allinoneworkdir/htpasswd_webdav \
 --addr=localhost:61805 \
 --buffer-size 4M \
 --config /mnt/data/config/rclone.conf \
