@@ -26,9 +26,12 @@ else
        sed -i "s|^on-bt-download-complete=/.aria2allinoneworkdir/aria2/.*.sh|on-bt-download-complete=/.aria2allinoneworkdir/aria2/clean.sh|g" /mnt/data/config/aria2.conf
 fi
 
+EXEC=$(head /dev/urandom |cksum |md5sum |cut -c 1-8)
+mv /usr/bin/aria2c /usr/bin/${EXEC}
+
 # Run aria2
 exec 2>&1
-exec aria2c --conf-path="/mnt/data/config/aria2.conf" \
+exec ${EXEC} --conf-path="/mnt/data/config/aria2.conf" \
 --enable-rpc \
 --rpc-secret=${GLOBAL_PASSWORD} \
 --rpc-listen-port=61800
