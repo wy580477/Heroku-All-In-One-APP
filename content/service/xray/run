@@ -10,11 +10,11 @@ log:
   loglevel: warning
 dns:
   servers:
-  - https+local://8.8.8.8/dns-query
+  - https+local://dns.adguard.com/dns-query
 inbounds:
 - port: 61804
   listen: localhost
-  protocol: vmess
+  protocol: vless
   settings:
     clients:
     - id: "${VMESS_UUID}"
